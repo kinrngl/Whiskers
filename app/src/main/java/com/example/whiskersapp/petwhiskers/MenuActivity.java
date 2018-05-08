@@ -64,9 +64,9 @@ public class MenuActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.contentFrame, new FragmentHome());
-        tx.commit();*/
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.contentFrame, new HomeFragment());
+        tx.commit();
 
     }
 
@@ -108,32 +108,28 @@ public class MenuActivity extends AppCompatActivity
         Fragment fragment = null;
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_home) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-            fragment = new FragmentHome();
+            fragment = new HomeFragment();
             toolbar.setTitle("Home");
         } else if (id == R.id.nav_findpet) {
-            fragment = new FragmentFindPet();
+            fragment = new FindPetFragment();
             toolbar.setTitle("Find Pet");
         } else if (id == R.id.nav_petentry) {
-            fragment = new FragmentPetEntry();
+            fragment = new PetEntryFragment();
             toolbar.setTitle("Pet Entry");
         } else if (id == R.id.nav_message) {
-            fragment = new FragmentMessage();
+            fragment = new MessageFragment();
             toolbar.setTitle("Message");
         } else if (id == R.id.nav_account) {
-            fragment = new FragmentAccount();
+            fragment = new AccountFragment();
             toolbar.setTitle("Account");
         } else if (id == R.id.nav_logout) {
             progressDialog.setMessage("Logging out...");
             progressDialog.show();
-            if(SharedPrefManager.getInstance(MainMenu.this).logout()){
-                progressDialog.dismiss();
-                finish();
-                startActivity(new Intent(MainMenu.this, MainActivity.class));
-            }
 
-        }*/
+
+        }
 
         if(fragment != null){
             FragmentManager fragmentManager = getSupportFragmentManager();
