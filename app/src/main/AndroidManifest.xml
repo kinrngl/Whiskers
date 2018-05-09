@@ -22,6 +22,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".SignUpActivity" />
+
         <activity android:name=".SignUpConActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />

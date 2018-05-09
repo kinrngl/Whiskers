@@ -19,13 +19,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-<<<<<<< HEAD
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class MenuActivity extends AppCompatActivity
-=======
-public class    MenuActivity extends AppCompatActivity
->>>>>>> master
+
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
     @Override
