@@ -19,13 +19,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null){
+            Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -125,9 +134,12 @@ public class MenuActivity extends AppCompatActivity
             fragment = new AccountFragment();
             toolbar.setTitle("Account");
         } else if (id == R.id.nav_logout) {
+            firebaseAuth = FirebaseAuth.getInstance();
             progressDialog.setMessage("Logging out...");
             progressDialog.show();
-
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, StartActivity.class));
 
         }
 
