@@ -22,10 +22,8 @@ import android.view.MenuItem;
 <<<<<<< HEAD
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MenuActivity extends AppCompatActivity
-=======
-public class    MenuActivity extends AppCompatActivity
->>>>>>> master
+public class MenuActivity extends AppCompatActivity{
+
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
     @Override
