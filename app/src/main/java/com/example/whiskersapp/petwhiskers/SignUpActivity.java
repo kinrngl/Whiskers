@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SignUpActivity extends AppCompatActivity {
     private EditText firstname;
     private EditText lastname;
     private EditText contact;
     private EditText email;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,12 @@ public class SignUpActivity extends AppCompatActivity {
         lastname = findViewById(R.id.signup_lname);
         contact = findViewById(R.id.signup_contact);
         email = findViewById(R.id.signup_email);
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            finish();
+            startActivity(new Intent(this, MenuActivity.class));
+
+        }
     }
 
     public void proceedView(View view){

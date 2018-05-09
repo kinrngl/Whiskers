@@ -37,6 +37,11 @@ public class SignUpConActivity extends AppCompatActivity {
 
         dbRef = FirebaseDatabase.getInstance().getReference("user_account");
         userAuth = FirebaseAuth.getInstance();
+        if(userAuth.getCurrentUser() != null){
+            finish();
+            startActivity(new Intent(this, MenuActivity.class));
+
+        }
 
         username = findViewById(R.id.signup_username);
         password = findViewById(R.id.signup_password);
