@@ -25,5 +25,13 @@
         android:layout_width="358dp"
         android:layout_height="566dp" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/cpefab"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/catprofileicon"
+        />
 
 </android.support.design.widget.CoordinatorLayout>
