@@ -8,21 +8,19 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText email_add;
     private EditText pword;
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
@@ -64,7 +63,5 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-
-        progressDialog.dismiss();
     }
 }
