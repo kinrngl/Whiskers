@@ -3,21 +3,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".PetEntryFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="Add Pet Entry"
+        android:textAlignment="center"
+        android:layout_marginTop="45dp"
+        android:textSize="24sp"
+        android:textColor="#000"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/cpefab"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:background="#00ACC1"
-        android:backgroundTint="#00ACC1"
-        android:src="@drawable/catprofileicon" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:hint="Pet Name"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:hint="Breed"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birthdate"
+        android:textSize="18sp"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:hint="Fur Color"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="235dp"
+        android:hint="Eye Color"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="MM"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="125dp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="DD"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="168dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="280dp"
+        android:hint="YYYY" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Entry"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/button_login"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="330dp"
+        android:hint="Description"
+        android:textAlignment="textStart"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+    
 </FrameLayout>
