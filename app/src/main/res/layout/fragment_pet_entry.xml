@@ -10,12 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/cpefab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/catprofileicon"
         android:layout_margin="16dp"
-        />
+        android:background="#00ACC1"
+        android:backgroundTint="#00ACC1"
+        android:src="@drawable/catprofileicon" />
 </FrameLayout>
