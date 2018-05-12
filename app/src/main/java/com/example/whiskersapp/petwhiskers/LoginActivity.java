@@ -1,5 +1,6 @@
 package com.example.whiskersapp.petwhiskers;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +21,7 @@ import org.w3c.dom.Text;
 public class LoginActivity extends AppCompatActivity {
     private EditText email_add;
     private EditText pword;
-
+    ProgressDialog progressDialog;
     FirebaseAuth mAuth;
 
     @Override
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressDialog = new ProgressDialog(this);
         email_add = findViewById(R.id.login_email);
         pword = findViewById(R.id.login_password);
 
@@ -40,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser(View view) {
+        progressDialog.setMessage("Logging In...");
+        progressDialog.show();
         String email = email_add.getText().toString();
         String password = pword.getText().toString();
         if (TextUtils.isEmpty(email)|| TextUtils.isEmpty(password)){
@@ -54,10 +59,12 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Error in Login Authentication!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Username or Password does not exist!", Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
+
+        progressDialog.dismiss();
     }
 }

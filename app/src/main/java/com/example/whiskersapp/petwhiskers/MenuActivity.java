@@ -19,13 +19,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-<<<<<<< HEAD
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuActivity extends AppCompatActivity
-=======
-public class    MenuActivity extends AppCompatActivity
->>>>>>> master
+
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
     @Override
@@ -39,6 +36,7 @@ public class    MenuActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -122,7 +120,6 @@ public class    MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
             fragment = new HomeFragment();
             toolbar.setTitle("Home");
         } else if (id == R.id.nav_findpet) {
