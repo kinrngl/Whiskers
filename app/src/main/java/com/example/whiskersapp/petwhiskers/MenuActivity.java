@@ -21,7 +21,11 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+<<<<<<< HEAD
 public class MenuActivity extends AppCompatActivity
+=======
+public class MenuActivity extends AppCompatActivity{
+>>>>>>> 26f2834c5610946ea05036b1d7c6501cfda53d7f
 
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
