@@ -21,17 +21,7 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-<<<<<<< HEAD
-public class MenuActivity extends AppCompatActivity
-=======
-<<<<<<< HEAD
-public class MenuActivity extends AppCompatActivity
-=======
-public class MenuActivity extends AppCompatActivity{
->>>>>>> 26f2834c5610946ea05036b1d7c6501cfda53d7f
->>>>>>> master
-
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +29,29 @@ public class MenuActivity extends AppCompatActivity{
         setContentView(R.layout.activity_menu);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() == null){
-            Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+        if (firebaseAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(MenuActivity.this, StartActivity.class);
             startActivity(intent);
             finish();
         }
+
+        FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
+
+
+            petEntryFAB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragmentPetEntry = new PetEntryFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    getSupportActionBar().setTitle("");
+
+
+                }
+            });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -158,6 +166,7 @@ public class MenuActivity extends AppCompatActivity{
 
             fragmentTransaction.replace(R.id.contentFrame, fragment);
             fragmentTransaction.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
