@@ -21,25 +21,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
-        FloatingActionButton createPetEntryFAB = (FloatingActionButton)v.findViewById(R.id.cpefabhome);
-
-        if(createPetEntryFAB != null) {
-            createPetEntryFAB.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Fragment fragmentCreatePetEntry = new CreatePetEntryFragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.contentFrame, fragmentCreatePetEntry);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
-            });
-        }
-
-
-        return v;
+        return inflater.inflate(R.layout.fragment_home, null);
     }
 
     @Override
