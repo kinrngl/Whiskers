@@ -7,18 +7,14 @@ public class User {
     String contact;
     String email;
     String password;
-    public model_user(){
 
-<<<<<<< HEAD:app/src/main/java/com/example/whiskersapp/petwhiskers/model_user.java
-    }
-    public model_user(String id, String fname, String lname, String contact_number, String email, String username, String password) {
-=======
+
+
     public User(){
 
     }
 
     public User(String id, String fname, String lname, String contact, String email, String password) {
->>>>>>> master:app/src/main/java/com/example/whiskersapp/petwhiskers/Model/User.java
         this.id = id;
         this.fname = fname;
         this.lname = lname;
