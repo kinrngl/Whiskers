@@ -73,14 +73,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-<<<<<<< HEAD
-
-
-
-        FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
-=======
         final FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
->>>>>>> d41d0aaba2c6b15cf64e5f3908664a87a007cb5d
 
 
             petEntryFAB.setOnClickListener(new View.OnClickListener() {
