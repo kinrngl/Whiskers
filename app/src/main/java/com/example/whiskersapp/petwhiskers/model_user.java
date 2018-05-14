@@ -8,7 +8,9 @@ public class model_user {
     String email;
     String username;
     String password;
+    public model_user(){
 
+    }
     public model_user(String id, String fname, String lname, String contact_number, String email, String username, String password) {
         this.id = id;
         this.fname = fname;

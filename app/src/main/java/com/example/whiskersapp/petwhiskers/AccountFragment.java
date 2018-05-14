@@ -28,6 +28,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class AccountFragment extends Fragment {
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
@@ -49,9 +54,9 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference("user_account").child(user.getUid());
 
         btnChangeEmail = (Button)getView().findViewById(R.id.change_email_button);
         btnChangePassword = (Button)getView().findViewById(R.id.change_password_button);
@@ -116,6 +121,10 @@ public class AccountFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
+                                                    Map<String, Object> updates = new HashMap<String,Object>();
+                                                    updates.put("email",newEmail.getText().toString());
+
+                                                   mDatabase.updateChildren(updates);
                                                     Toast.makeText(getActivity(), "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
                                                     signOut();
                                                     progressBar.setVisibility(View.GONE);
