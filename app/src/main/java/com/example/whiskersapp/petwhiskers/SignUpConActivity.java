@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.whiskersapp.petwhiskers.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,8 +27,7 @@ public class SignUpConActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private FirebaseAuth userAuth;
-
-    DatabaseReference dbRef;
+    private DatabaseReference dbRef;
 
     int result_auth = 0;
     @Override
@@ -67,7 +67,7 @@ public class SignUpConActivity extends AppCompatActivity {
             if(registerAuth(email,pword) == 1){
                 String id = userAuth.getUid();
 
-                model_user user = new model_user(id,fname,lname,contact,email,user_name,pword);
+                User user = new User(id,fname,lname,contact,user_name,pword);
                 dbRef.child(id).setValue(user);
 
 

@@ -22,13 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="175dp"
         android:hint="First Name"
         android:backgroundTint="#ffff"
         android:textColorHint="#ffff"
         android:textColor="#ffff"
         android:drawableLeft="@drawable/person"
         android:fontFamily="@font/roboto"
+        android:inputType="textPersonName"
         android:paddingLeft="8dp"/>
 
     <EditText
@@ -37,12 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="220dp"
         android:hint="Last Name"
         android:backgroundTint="#ffff"
         android:textColorHint="#ffff"
         android:textColor="#ffff"
         android:drawableLeft="@drawable/person"
+        android:inputType="textPersonName"
         android:fontFamily="@font/roboto"
         android:paddingLeft="8dp"/>
 
@@ -52,13 +54,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="265dp"
         android:hint="Contact Number"
         android:backgroundTint="#ffff"
         android:textColorHint="#ffff"
         android:textColor="#ffff"
         android:drawableLeft="@drawable/phone"
         android:fontFamily="@font/roboto"
+        android:inputType="textPhonetic"
         android:paddingLeft="8dp"/>
 
     <EditText
@@ -67,13 +70,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="310dp"
         android:hint="Email"
         android:backgroundTint="#ffff"
         android:textColorHint="#ffff"
         android:drawableLeft="@drawable/mail"
         android:fontFamily="@font/roboto"
         android:textColor="#ffff"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="8dp"/>
+
+    <EditText
+        android:id="@+id/signup_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="355dp"
+        android:hint="Password"
+        android:backgroundTint="#ffff"
+        android:textColorHint="#ffff"
+        android:drawableLeft="@drawable/mail"
+        android:fontFamily="@font/roboto"
+        android:textColor="#ffff"
+        android:inputType="textPassword"
         android:paddingLeft="8dp"/>
     <Button
         android:id="@+id/signupnext_button_"
@@ -81,14 +101,14 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button_signup"
         android:fontFamily="@font/roboto"
-        android:text="Next"
+        android:text="Create Account"
         android:textAllCaps="false"
         android:textColor="#ffff"
         android:textSize="20sp"
-        android:onClick="proceedView"/>
+        android:onClick="registerUser"/>
 
     <TextView
         android:layout_width="wrap_content"

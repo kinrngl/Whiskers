@@ -124,7 +124,11 @@ public class AccountFragment extends Fragment {
                                                     Map<String, Object> updates = new HashMap<String,Object>();
                                                     updates.put("email",newEmail.getText().toString());
 
+<<<<<<< HEAD
                                                    mDatabase.updateChildren(updates);
+=======
+                                                    mDatabase.updateChildren(updates);
+>>>>>>> master
                                                     Toast.makeText(getActivity(), "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
                                                     signOut();
                                                     progressBar.setVisibility(View.GONE);
@@ -141,10 +145,17 @@ public class AccountFragment extends Fragment {
                         }
                     });
 
+<<<<<<< HEAD
                     } else if (newEmail.getText().toString().trim().equals("")) {
                         newEmail.setError("Enter email");
                         progressBar.setVisibility(View.GONE);
                     }
+=======
+                } else if (newEmail.getText().toString().trim().equals("")) {
+                    newEmail.setError("Enter email");
+                    progressBar.setVisibility(View.GONE);
+                }
+>>>>>>> master
             }
         });
 
