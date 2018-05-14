@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
                 && !TextUtils.isEmpty(email_add) && !TextUtils.isEmpty(pword)){
             progressDialog.dismiss();
             if(registerAuth(email_add,pword) == 1){
-                String id = dbRef.push().getKey();
+                String id = userAuth.getUid();
                 User user = new User(id, fname, lname, contact_num, email_add, pword);
                 dbRef.child(id).setValue(user);
 
@@ -93,13 +93,14 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        result_auth=1;
                         //Toast.makeText(getApplicationContext(),"User Authentication Successful!", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getApplicationContext(),"Error on Adding User Auth!", Toast.LENGTH_LONG).show();
                     }
                 }
             });
-        result_auth=1;
+
         return result_auth;
     }
 }

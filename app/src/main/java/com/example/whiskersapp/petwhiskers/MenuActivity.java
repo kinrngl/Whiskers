@@ -62,6 +62,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                         if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
                             user = utest;
                             Toast.makeText(getApplicationContext(), "Welcome "+utest.getFname(), Toast.LENGTH_LONG).show();
+                            ((TextView)findViewById(R.id.navHeader_name)).setText(utest.getFname() +" "+utest.getLname());
                         }
                     }
                 }
