@@ -35,21 +35,22 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
 
-        FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
+        final FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
 
 
             petEntryFAB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Fragment fragmentPetEntry = new PetEntryFragment();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                    getSupportActionBar().setTitle("");
-
-
+                    if(fragmentPetEntry != null) {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("Create Pet Entry");
+                        petEntryFAB.hide();
+                    }
                 }
             });
 
@@ -132,6 +133,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         ProgressDialog progressDialog = new ProgressDialog(MenuActivity.this);
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
         Fragment fragment = null;
         int id = item.getItemId();
 
@@ -166,6 +168,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
             fragmentTransaction.replace(R.id.contentFrame, fragment);
             fragmentTransaction.commit();
+            petEntryFAB.show();
 
         }
 
