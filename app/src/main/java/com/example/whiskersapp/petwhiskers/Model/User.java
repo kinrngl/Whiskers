@@ -1,21 +1,23 @@
-package com.example.whiskersapp.petwhiskers;
+package com.example.whiskersapp.petwhiskers.Model;
 
-public class model_user {
+public class User {
     String id;
     String fname;
     String lname;
-    String contact_number;
+    String contact;
     String email;
-    String username;
     String password;
 
-    public model_user(String id, String fname, String lname, String contact_number, String email, String username, String password) {
+    public User(){
+
+    }
+
+    public User(String id, String fname, String lname, String contact, String email, String password) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
-        this.contact_number = contact_number;
+        this.contact = contact;
         this.email = email;
-        this.username = username;
         this.password = password;
     }
 
@@ -43,12 +45,12 @@ public class model_user {
         this.lname = lname;
     }
 
-    public String getContact_number() {
-        return contact_number;
+    public String getContact() {
+        return contact;
     }
 
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public String getEmail() {
@@ -57,14 +59,6 @@ public class model_user {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

@@ -5,10 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,11 +18,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.whiskersapp.petwhiskers.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference table_user;
+    private TextView navHeaderDisplay;
+    private User user, utest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +49,34 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MenuActivity.this, StartActivity.class);
             startActivity(intent);
             finish();
+        }else{
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            table_user = firebaseDatabase.getReference("user_account");
+
+            table_user.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot children: dataSnapshot.getChildren()){
+                        utest = children.getValue(User.class);
+
+                        if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
+                            user = utest;
+                            Toast.makeText(getApplicationContext(), "Welcome "+utest.getFname(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
-        FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
+
+
+
+        FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
 
 
             petEntryFAB.setOnClickListener(new View.OnClickListener() {
@@ -53,10 +94,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
             public void onDrawerClosed(View view) {

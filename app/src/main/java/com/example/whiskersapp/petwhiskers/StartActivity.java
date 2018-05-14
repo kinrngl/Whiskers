@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,6 +31,11 @@ public class StartActivity extends AppCompatActivity {
     public void loginView(View view){
         Intent intent = new Intent(StartActivity.this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    public void fbView(View view){
+        Toast.makeText(getApplicationContext(),"This feature is not available.",
+                Toast.LENGTH_LONG).show();
     }
 
 }
