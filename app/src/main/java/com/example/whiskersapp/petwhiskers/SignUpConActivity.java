@@ -65,10 +65,11 @@ public class SignUpConActivity extends AppCompatActivity {
 
             progressDialog.dismiss();
             if(registerAuth(email,pword) == 1){
-                String id = dbRef.push().getKey();
+                String id = userAuth.getUid();
 
                 User user = new User(id,fname,lname,contact,user_name,pword);
                 dbRef.child(id).setValue(user);
+
 
                 Toast.makeText(this,"User Added!", Toast.LENGTH_LONG).show();
             }

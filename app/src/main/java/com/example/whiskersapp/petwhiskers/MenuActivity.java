@@ -44,6 +44,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
             Intent intent = new Intent(MenuActivity.this, StartActivity.class);
@@ -62,6 +63,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                         if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
                             user = utest;
                             Toast.makeText(getApplicationContext(), "Welcome "+utest.getFname(), Toast.LENGTH_LONG).show();
+                            ((TextView)findViewById(R.id.navHeader_name)).setText(utest.getFname() +" "+utest.getLname());
                         }
                     }
                 }
@@ -73,24 +75,26 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        final FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
 
 
-            petEntryFAB.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Fragment fragmentPetEntry = new PetEntryFragment();
-                    if(fragmentPetEntry != null) {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setTitle("Create Pet Entry");
-                        petEntryFAB.hide();
-                    }
-                }
-            });
+
+        FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
+
+
+        petEntryFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragmentPetEntry = new PetEntryFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                getSupportActionBar().setTitle("");
+
+
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -171,7 +175,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         ProgressDialog progressDialog = new ProgressDialog(MenuActivity.this);
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        FloatingActionButton petEntryFAB = (FloatingActionButton) findViewById(R.id.cpefab);
         Fragment fragment = null;
         int id = item.getItemId();
 
@@ -206,7 +209,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
             fragmentTransaction.replace(R.id.contentFrame, fragment);
             fragmentTransaction.commit();
-            petEntryFAB.show();
 
         }
 
