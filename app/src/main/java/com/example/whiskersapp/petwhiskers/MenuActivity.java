@@ -25,10 +25,8 @@ import com.example.whiskersapp.petwhiskers.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -62,8 +60,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
                         if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
                             user = utest;
-                            Toast.makeText(getApplicationContext(), "Welcome "+utest.getFname(), Toast.LENGTH_LONG).show();
-                            ((TextView)findViewById(R.id.navHeader_name)).setText(utest.getFname() +" "+utest.getLname());
+                            Toast.makeText(getApplicationContext(), "Welcome "+user.getFname(), Toast.LENGTH_LONG).show();
+                            ((TextView)findViewById(R.id.navHeader_name)).setText(user.getFname() +" "+user.getLname());
                         }
                     }
                 }
@@ -79,7 +77,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
 
         FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
-
 
         petEntryFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +171,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         ProgressDialog progressDialog = new ProgressDialog(MenuActivity.this);
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         Fragment fragment = null;
         int id = item.getItemId();
 
@@ -191,7 +188,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             fragment = new MessageFragment();
             toolbar.setTitle("Message");
         } else if (id == R.id.nav_account) {
-            fragment = new AccountFragment();
+            fragment = new AccountDisplayFragment();
             toolbar.setTitle("Account");
         } else if (id == R.id.nav_logout) {
             firebaseAuth = FirebaseAuth.getInstance();
@@ -216,4 +213,5 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
