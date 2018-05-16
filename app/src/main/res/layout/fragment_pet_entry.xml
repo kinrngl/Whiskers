@@ -16,75 +16,119 @@
         android:textSize="24sp"
         android:textColor="#000"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="Pet Name"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="145dp"
-        android:hint="Breed"
-        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Birthdate"
+        android:layout_marginTop="100dp"
+        android:text="Pet Category:"
         android:textSize="18sp"
-        android:layout_marginTop="290dp"
-        android:layout_marginLeft="10dp"
+        android:textColor="#000"/>
+
+    <Spinner
+        android:id="@+id/spinner_petType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="120dp"
+        android:hint="Pet Breed"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="200dp"
+        android:text="Breed:"
+        android:textSize="18sp"
+        android:textColor="#000"/>
+    <Spinner
+        android:id="@+id/spinner_petBreed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="250dp"
+        />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:text="Gender:"
+        android:textSize="18sp"
+        android:textColor="#000"/>
+    <Spinner
+        android:id="@+id/spinner_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="125dp"
+        android:hint="Gender" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price/Fee:"
+        android:textSize="18sp"
+        android:layout_marginTop="180dp"
         android:textColor="#000"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/pet_price"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:hint="Fur Color"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="235dp"
-        android:hint="Eye Color"
-        />
+        android:layout_marginTop="170dp"
+        android:layout_marginLeft="125dp"
+        android:inputType="number" />
 
-    <EditText
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="MM"
-        android:layout_marginTop="280dp"
-        android:layout_marginLeft="125dp"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="DD"
-        android:layout_marginTop="280dp"
-        android:layout_marginLeft="168dp"/>
+        android:text="Birthdate:"
+        android:textSize="18sp"
+        android:layout_marginTop="220dp"
+        android:textColor="#000"/>
+
+
 
     <EditText
+        android:id="@+id/birthday"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="125dp"
+        android:focusable="false"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="280dp"
-        android:hint="YYYY" />
+        android:layout_marginTop="320dp"
+        android:text="Type of Sale:"
+        android:textSize="18sp"
+        android:textColor="#000"/>
+    <Spinner
+        android:id="@+id/spinner_Sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="125dp"
+         />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/add_petEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Entry"
         android:layout_marginTop="450dp"
-        android:background="@drawable/button_login"/>
+        android:background="@drawable/button_login"
+        />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/pet_desc"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="330dp"
-        android:hint="Description"
-        android:textAlignment="textStart"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-    
+        android:layout_height="56dp"
+        android:layout_marginTop="350dp"
+        android:hint="Description" />
 </FrameLayout>

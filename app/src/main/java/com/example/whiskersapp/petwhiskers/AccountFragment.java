@@ -236,6 +236,9 @@ public class AccountFragment extends Fragment {
 
     }
     public void signOut() {
+
         auth.signOut();
+        Intent redirect = new Intent(getActivity(),LoginActivity.class);
+        getActivity().startActivity(redirect);
     }
 }
