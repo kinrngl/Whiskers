@@ -57,11 +57,24 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         utest = children.getValue(User.class);
+<<<<<<< HEAD
 
                         if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
                             user = utest;
                             Toast.makeText(getApplicationContext(), "Welcome "+user.getFname(), Toast.LENGTH_LONG).show();
                             ((TextView)findViewById(R.id.navHeader_name)).setText(user.getFname() +" "+user.getLname());
+=======
+                        if(firebaseAuth.getCurrentUser()==null){
+                            Intent intent = new Intent(MenuActivity.this, StartActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
+                            if (utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())) {
+                                user = utest;
+                                Toast.makeText(getApplicationContext(), "Welcome " + utest.getFname(), Toast.LENGTH_LONG).show();
+                                ((TextView) findViewById(R.id.navHeader_name)).setText(utest.getFname() + " " + utest.getLname());
+                            }
+>>>>>>> 97df7813d66cbec9228232b2acd9a297609eebab
                         }
                     }
                 }
