@@ -25,10 +25,15 @@ import com.example.whiskersapp.petwhiskers.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+<<<<<<< HEAD
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+=======
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -59,6 +64,16 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         utest = children.getValue(User.class);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+                        if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
+                            user = utest;
+                            Toast.makeText(getApplicationContext(), "Welcome "+user.getFname(), Toast.LENGTH_LONG).show();
+                            ((TextView)findViewById(R.id.navHeader_name)).setText(user.getFname() +" "+user.getLname());
+=======
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
                         if(firebaseAuth.getCurrentUser()==null){
                             Intent intent = new Intent(MenuActivity.this, StartActivity.class);
                             startActivity(intent);
@@ -69,6 +84,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                                 Toast.makeText(getApplicationContext(), "Welcome " + utest.getFname(), Toast.LENGTH_LONG).show();
                                 ((TextView) findViewById(R.id.navHeader_name)).setText(utest.getFname() + " " + utest.getLname());
                             }
+<<<<<<< HEAD
+=======
+>>>>>>> 97df7813d66cbec9228232b2acd9a297609eebab
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
                         }
                     }
                 }
@@ -85,7 +104,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
         petEntryFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +201,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         ProgressDialog progressDialog = new ProgressDialog(MenuActivity.this);
+<<<<<<< HEAD
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+=======
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
         Fragment fragment = null;
         int id = item.getItemId();
 
@@ -196,7 +222,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             fragment = new MessageFragment();
             toolbar.setTitle("Message");
         } else if (id == R.id.nav_account) {
+<<<<<<< HEAD
             fragment = new AccountFragment();
+=======
+            fragment = new AccountDisplayFragment();
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
             toolbar.setTitle("Account");
         } else if (id == R.id.nav_logout) {
             firebaseAuth = FirebaseAuth.getInstance();
@@ -221,4 +251,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
 }
