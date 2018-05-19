@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -37,11 +38,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private TextView navHeaderDisplay;
     private User user, utest;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
@@ -57,24 +59,20 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         utest = children.getValue(User.class);
-
                         if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
                             user = utest;
                             Toast.makeText(getApplicationContext(), "Welcome "+user.getFname(), Toast.LENGTH_LONG).show();
                             ((TextView)findViewById(R.id.navHeader_name)).setText(user.getFname() +" "+user.getLname());
-                        }
                     }
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
-        }
-
-
-
+            }
+        });
+    }
 
         FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
 
@@ -136,6 +134,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         tx.commit();
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -215,3 +214,4 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     }
 
 }
+

@@ -56,28 +56,46 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void registerUser(View view){
-        String fname = firstname.getText().toString();
-        String lname = lastname.getText().toString();
-        String contact_num = contact.getText().toString();
-        String email_add = email.getText().toString();
-        String pword = password.getText().toString();
+        final String fname = firstname.getText().toString();
+        final String lname = lastname.getText().toString();
+        final String contact_num = contact.getText().toString();
+        final String email_add = email.getText().toString();
+        final String pword = password.getText().toString();
 
         progressDialog.setMessage("Creating account...");
         progressDialog.show();
 
         if(!TextUtils.isEmpty(fname) && !TextUtils.isEmpty(lname) && !TextUtils.isEmpty(contact_num)
                 && !TextUtils.isEmpty(email_add) && !TextUtils.isEmpty(pword)){
-            progressDialog.dismiss();
-            if(registerAuth(email_add,pword) == 1){
+            /*if(registerAuth(email_add,pword) == 1){
                 String id = userAuth.getUid();
                 User user = new User(id,fname,lname,contact_num,email_add,pword);
                 dbRef.child(id).setValue(user);
 
+                progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),"User Added!", Toast.LENGTH_LONG).show();
             }else{
+                progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),"User authentication Failed!", Toast.LENGTH_LONG).show();
-            }
+            })*/
+            userAuth.createUserWithEmailAndPassword(email_add, pword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        String id = userAuth.getUid();
+                        User user = new User(id,fname,lname,contact_num,email_add,pword);
+                        dbRef.child(id).setValue(user);
 
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"User Added!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SignUpActivity.this, MenuActivity.class);
+                        startActivity(intent);
+                    }else{
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"User authentication Failed!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
 
     }
@@ -88,19 +106,4 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public int registerAuth(String email, String password){
-        userAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        result_auth=1;
-                        //Toast.makeText(getApplicationContext(),"User Authentication Successful!", Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Error on Adding User Auth!", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
-        return result_auth;
-    }
 }
