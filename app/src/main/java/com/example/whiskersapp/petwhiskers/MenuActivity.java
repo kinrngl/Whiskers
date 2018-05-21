@@ -35,9 +35,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference table_user;
-    private TextView navHeaderDisplay;
     private User user, utest;
-
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -46,11 +45,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_menu);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
         if (firebaseAuth.getCurrentUser() == null) {
             Intent intent = new Intent(MenuActivity.this, StartActivity.class);
             startActivity(intent);
             finish();
         }else{
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
             firebaseDatabase = FirebaseDatabase.getInstance();
             table_user = firebaseDatabase.getReference("user_account");
 
@@ -67,12 +69,13 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-    }
+                }
+            });
+            progressDialog.dismiss();
+        }
 
         FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
 

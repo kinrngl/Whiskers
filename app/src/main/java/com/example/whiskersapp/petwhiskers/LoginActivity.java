@@ -29,29 +29,28 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference dbRef;
-
-    int result = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
             finish();
             Intent intent = new Intent(this, MenuActivity.class);
             intent.putExtra("email",mAuth.getCurrentUser().getEmail());
+
+            progressDialog.dismiss();
             startActivity(intent);
         }
 
-        progressDialog = new ProgressDialog(this);
         email_add = findViewById(R.id.login_email);
         pword = findViewById(R.id.login_password);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        dbRef = firebaseDatabase.getReference("user_account");
     }
 
 
@@ -61,8 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = email_add.getText().toString();
         String password = pword.getText().toString();
 
-        if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)){
-            Toast.makeText(LoginActivity.this, "Please fill in the missing field/s",Toast.LENGTH_LONG).show();
+        if(email.isEmpty() || password.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Please fill in the missing field/s",Toast.LENGTH_SHORT).show();
         }else{
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override

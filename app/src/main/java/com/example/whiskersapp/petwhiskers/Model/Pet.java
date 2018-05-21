@@ -7,26 +7,16 @@ public class Pet {
     String breed;
     String eyecolor;
     String furcolor;
-    String desc;
+    String details;
     String isAdopt; //yes - adopted, no - not yet adopted
     String status; //available, deleted post
+    String gender;
+    String category;
+    String imgUrl;
     String owner_id;
 
     public Pet(){
 
-    }
-
-    public Pet(String id, String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String desc, String isAdopt, String status, String owner_id) {
-        this.id = id;
-        this.pet_name = pet_name;
-        this.birthdate = birthdate;
-        this.breed = breed;
-        this.eyecolor = eyecolor;
-        this.furcolor = furcolor;
-        this.desc = desc;
-        this.isAdopt = isAdopt;
-        this.status = status;
-        this.owner_id = owner_id;
     }
 
     public String getId() {
@@ -77,12 +67,12 @@ public class Pet {
         this.furcolor = furcolor;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDetails() {
+        return details;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getIsAdopt() {
@@ -99,6 +89,30 @@ public class Pet {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getOwner_id() {
