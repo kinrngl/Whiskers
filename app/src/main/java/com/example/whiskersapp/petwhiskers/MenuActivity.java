@@ -37,25 +37,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference table_user;
-    private TextView navHeaderDisplay;
     private User user, utest;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-
         firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
         if (firebaseAuth.getCurrentUser() == null) {
             Intent intent = new Intent(MenuActivity.this, StartActivity.class);
             startActivity(intent);
             finish();
         }else{
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
             firebaseDatabase = FirebaseDatabase.getInstance();
             table_user = firebaseDatabase.getReference("user_account");
 
@@ -65,13 +69,17 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         utest = children.getValue(User.class);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
+=======
+>>>>>>> temp_acain
                         if(utest.getEmail().equals(firebaseAuth.getCurrentUser().getEmail())){
                             user = utest;
                             Toast.makeText(getApplicationContext(), "Welcome "+user.getFname(), Toast.LENGTH_LONG).show();
                             ((TextView)findViewById(R.id.navHeader_name)).setText(user.getFname() +" "+user.getLname());
+<<<<<<< HEAD
 =======
 >>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
                         if(firebaseAuth.getCurrentUser()==null){
@@ -89,18 +97,19 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 >>>>>>> 97df7813d66cbec9228232b2acd9a297609eebab
 >>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
                         }
+=======
+>>>>>>> temp_acain
                     }
                 }
+            }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
             });
+            progressDialog.dismiss();
         }
-
-
-
 
         FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
 
@@ -151,7 +160,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         findPet.setTitle("Find Pet");
 
         MenuItem petEntry = menu.findItem(R.id.nav_petentry);
-        petEntry.setTitle("Pet Entry");
+        petEntry.setTitle("Pet");
 
         MenuItem message = menu.findItem(R.id.nav_message);
         message.setTitle("Message");
@@ -166,6 +175,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         tx.commit();
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -216,8 +226,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             fragment = new FindPetFragment();
             toolbar.setTitle("Find Pet");
         } else if (id == R.id.nav_petentry) {
-            fragment = new PetEntryFragment();
-            toolbar.setTitle("Pet Entry");
+            fragment = new PetFragment();
+            toolbar.setTitle("Pet");
         } else if (id == R.id.nav_message) {
             fragment = new MessageFragment();
             toolbar.setTitle("Message");
@@ -256,3 +266,4 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
 >>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
 }
+

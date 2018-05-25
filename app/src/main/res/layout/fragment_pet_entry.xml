@@ -10,12 +10,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
         android:text="Add Pet Entry"
         android:textAlignment="center"
-        android:layout_marginTop="45dp"
-        android:textSize="24sp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        android:textSize="24sp" />
 
+<<<<<<< HEAD
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,10 +52,52 @@
         />
 
 
+=======
+    <EditText
+        android:id="@+id/pet_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:hint="Pet Name"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/pet_breed"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:hint="Breed"
+        android:inputType="text"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birthdate"
+        android:textSize="20sp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#000"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="155dp"
+        android:text="Gender"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/pet_gender"
+        android:layout_width="111dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="150dp" />
+>>>>>>> temp_acain
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginTop="145dp"
         android:text="Gender:"
         android:textSize="18sp"
@@ -118,6 +161,49 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/add_petEntry"
+=======
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="290dp"
+        android:text="Category"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/pet_category"
+        android:layout_width="111dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="285dp" />
+
+    <EditText
+        android:id="@+id/pet_bday"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="100dp"
+        android:hint="MM - DD - YYYY"
+        android:inputType="date"/>
+
+    <EditText
+        android:id="@+id/pet_furcolor"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:hint="Fur Color"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/pet_eyecolor"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:layout_marginLeft="170dp"
+        android:hint="Eye Color"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/pet_proceedAdd"
+>>>>>>> temp_acain
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Entry"
@@ -128,7 +214,15 @@
     <EditText
         android:id="@+id/pet_desc"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="56dp"
         android:layout_marginTop="350dp"
         android:hint="Description" />
+=======
+        android:layout_height="86dp"
+        android:layout_marginTop="330dp"
+        android:hint="Description"
+        android:textAlignment="textStart" />
+
+>>>>>>> temp_acain
 </FrameLayout>
