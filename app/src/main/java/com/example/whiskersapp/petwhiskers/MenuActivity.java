@@ -122,7 +122,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         findPet.setTitle("Find Pet");
 
         MenuItem petEntry = menu.findItem(R.id.nav_petentry);
-        petEntry.setTitle("Pet Entry");
+        petEntry.setTitle("Pet");
 
         MenuItem message = menu.findItem(R.id.nav_message);
         message.setTitle("Message");
@@ -184,8 +184,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             fragment = new FindPetFragment();
             toolbar.setTitle("Find Pet");
         } else if (id == R.id.nav_petentry) {
-            fragment = new PetEntryFragment();
-            toolbar.setTitle("Pet Entry");
+            fragment = new PetFragment();
+            toolbar.setTitle("Pet");
         } else if (id == R.id.nav_message) {
             fragment = new MessageFragment();
             toolbar.setTitle("Message");
