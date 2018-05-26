@@ -61,19 +61,11 @@ public class FindPetFragment extends Fragment implements OnMapReadyCallback,
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_find_pet, container ,false);
+        return  inflater.inflate(R.layout.fragment_find_pet, null);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission();
-        }
-        mapFragment.getMapAsync(this);
-
-
-        return view;
     }
+
+
 
     private boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -114,7 +106,13 @@ public class FindPetFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkLocationPermission();
+        }
+        mapFragment.getMapAsync(this);
 
     }
 
