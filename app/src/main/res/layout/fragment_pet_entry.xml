@@ -16,43 +16,6 @@
         android:textColor="#000"
         android:textSize="24sp" />
 
-<<<<<<< HEAD
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Pet Category:"
-        android:textSize="18sp"
-        android:textColor="#000"/>
-
-    <Spinner
-        android:id="@+id/spinner_petType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="120dp"
-        android:hint="Pet Breed"
-        />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="200dp"
-        android:text="Breed:"
-        android:textSize="18sp"
-        android:textColor="#000"/>
-    <Spinner
-        android:id="@+id/spinner_petBreed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="250dp"
-        />
-
-
-=======
     <EditText
         android:id="@+id/pet_name"
         android:layout_width="match_parent"
@@ -92,76 +55,10 @@
         android:layout_height="36dp"
         android:layout_marginLeft="240dp"
         android:layout_marginTop="150dp" />
->>>>>>> temp_acain
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_marginTop="145dp"
-        android:text="Gender:"
-        android:textSize="18sp"
-        android:textColor="#000"/>
-    <Spinner
-        android:id="@+id/spinner_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="145dp"
-        android:layout_marginLeft="125dp"
-        android:hint="Gender" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price/Fee:"
-        android:textSize="18sp"
-        android:layout_marginTop="180dp"
-        android:textColor="#000"/>
-
-    <EditText
-        android:id="@+id/pet_price"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
-        android:layout_marginLeft="125dp"
-        android:inputType="number" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Birthdate:"
-        android:textSize="18sp"
-        android:layout_marginTop="220dp"
-        android:textColor="#000"/>
-
-
-
-    <EditText
-        android:id="@+id/birthday"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
-        android:layout_marginLeft="125dp"
-        android:focusable="false"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:text="Type of Sale:"
-        android:textSize="18sp"
-        android:textColor="#000"/>
-    <Spinner
-        android:id="@+id/spinner_Sale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:layout_marginLeft="125dp"
-         />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/add_petEntry"
-=======
         android:layout_marginLeft="5dp"
         android:layout_marginTop="290dp"
         android:text="Category"
@@ -203,26 +100,18 @@
 
     <Button
         android:id="@+id/pet_proceedAdd"
->>>>>>> temp_acain
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Entry"
         android:layout_marginTop="450dp"
-        android:background="@drawable/button_login"
-        />
+        android:background="@drawable/button_login" />
 
     <EditText
         android:id="@+id/pet_desc"
         android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:layout_height="56dp"
-        android:layout_marginTop="350dp"
-        android:hint="Description" />
-=======
         android:layout_height="86dp"
         android:layout_marginTop="330dp"
         android:hint="Description"
         android:textAlignment="textStart" />
 
->>>>>>> temp_acain
 </FrameLayout>

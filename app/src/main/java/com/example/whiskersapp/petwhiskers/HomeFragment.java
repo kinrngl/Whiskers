@@ -27,13 +27,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-<<<<<<< HEAD
-
-
-    }
-=======
     }
 
->>>>>>> 5a21b1278ee9b0f67c8cc9e549e28b59cc73c156
 }

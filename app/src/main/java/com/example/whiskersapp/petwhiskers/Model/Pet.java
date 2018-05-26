@@ -2,15 +2,6 @@ package com.example.whiskersapp.petwhiskers.Model;
 
 public class Pet {
     String id;
-<<<<<<< HEAD
-    String petBreed;
-    String petCategory;
-    String petPrice;
-    String petBday;
-    String petDesc;
-    String petGender;
-    String petStatus; //available, deleted post
-=======
     String pet_name;
     String birthdate;
     String breed;
@@ -22,27 +13,11 @@ public class Pet {
     String gender;
     String category;
     String imgUrl;
->>>>>>> temp_acain
     String owner_id;
 
     public Pet(){
 
     }
-<<<<<<< HEAD
-    public Pet(String id,String petBreed, String petCategory, String petPrice,String petBday,String petDesc,String petGender,String petStatus,String owner_id ){
-        this.id = id;
-        this.petBreed = petBreed;
-        this.petCategory = petCategory;
-        this.petPrice = petPrice;
-        this.petBday = petBday;
-        this.petDesc = petDesc;
-        this.petGender = petGender;
-        this.petStatus = petStatus;
-        this.owner_id = owner_id;
-    }
-
-=======
->>>>>>> temp_acain
 
     public String getId() {
         return id;
@@ -52,72 +27,69 @@ public class Pet {
         this.id = id;
     }
 
-    public String getPetBreed() {
-        return petBreed;
+    public String getPet_name() {
+        return pet_name;
     }
 
-    public void setPetBreed(String petBreed) {
-        this.petBreed = petBreed;
+    public void setPet_name(String pet_name) {
+        this.pet_name = pet_name;
     }
 
-    public String getPetCategory() {
-        return petCategory;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-
-    public void setPetCategory(String petCategory) {
-        this.petCategory = petCategory;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
-    public String getPetPrice() {
-        return petPrice;
+    public String getBreed() {
+        return breed;
     }
 
-    public void setPetPrice(String petPrice) {
-        this.petPrice = petPrice;
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
-    public String getPetBday() {
-        return petBday;
+    public String getEyecolor() {
+        return eyecolor;
     }
 
-    public void setPetBday(String petBday) {
-        this.petBday = petBday;
+    public void setEyecolor(String eyecolor) {
+        this.eyecolor = eyecolor;
     }
 
-    public String getPetDesc(){
-        return petDesc;
+    public String getFurcolor() {
+        return furcolor;
     }
 
-<<<<<<< HEAD
-    public void setPetDesc(String petDesc) {
-        this.petDesc = petDesc;
+    public void setFurcolor(String furcolor) {
+        this.furcolor = furcolor;
     }
 
-    public String getPetGender() {
-        return petGender;
-=======
     public String getDetails() {
         return details;
     }
 
     public void setDetails(String details) {
         this.details = details;
->>>>>>> temp_acain
     }
 
-    public void setPetGender(String petDesc) {
-        this.petDesc = petDesc;
+    public String getIsAdopt() {
+        return isAdopt;
     }
 
-    public String getPetStatus() {
-        return petStatus;
+    public void setIsAdopt(String isAdopt) {
+        this.isAdopt = isAdopt;
     }
 
-    public void setPetStatus(String petStatus) {
-        this.petStatus = petStatus;
+    public String getStatus() {
+        return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getGender() {
         return gender;
