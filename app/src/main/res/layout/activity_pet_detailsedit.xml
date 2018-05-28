@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PetDetails">
+    tools:context=".PetDetailsEdit">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout_pet"
@@ -14,7 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_pet"
+            android:id="@+id/collapsing_petedit"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:fitsSystemWindows="true"
@@ -23,7 +23,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/img_pet"
+                android:id="@+id/img_petedit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@null"
@@ -42,10 +42,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fav_fab_bookmark"
+        android:id="@+id/fav_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_star_black_24dp"
+        android:src="@drawable/image"
         app:elevation="6dp"
         app:layout_anchor="@id/app_bar_layout_pet"
         app:layout_anchorGravity="bottom|right|end"
@@ -76,7 +76,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pet_breed"
+                        android:id="@+id/petedit_breed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content">
                 
                 <TextView
-                    android:id="@+id/pet_description_details"
+                    android:id="@+id/petedit_description_details"
                     android:layout_marginTop="12dp"
                     android:lineSpacingMultiplier="1.5"
                     android:padding="12dp"
@@ -136,16 +136,25 @@
             </android.support.v7.widget.CardView>
 
             <Button
+                android:id="@+id/petedit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Message Owner"
+                android:text="Edit Pet Entry"
                 android:layout_marginTop="30dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/button_login"/>
+                android:background="@drawable/button_login"
+                android:onClick="editProfile"/>
+            <Button
+                android:id="@+id/petedit_remove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Entry"
+                android:layout_marginTop="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/button_login"
+                android:onClick="removeProfile"/>
 
         </LinearLayout>
-
-        
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

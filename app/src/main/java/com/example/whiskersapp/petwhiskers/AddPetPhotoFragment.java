@@ -89,6 +89,8 @@ public class AddPetPhotoFragment extends Fragment {
         btnAddPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.setMessage("Creating Pet Entry...");
+                progressDialog.show();
                 uploadFile();
             }
         });
@@ -115,9 +117,6 @@ public class AddPetPhotoFragment extends Fragment {
 
     private void uploadFile(){
         if(imageUri != null){
-            progressDialog.setMessage("Creating Pet Entry...");
-            progressDialog.show();
-
             StorageReference fileRef = mStoreRef.child(System.currentTimeMillis()
                 +"."+getFileExtension(imageUri));
             fileRef.putFile(imageUri)

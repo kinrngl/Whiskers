@@ -99,6 +99,7 @@ public class AccountDisplayFragment extends Fragment {
 
             }
         });
+
         choice = new AlertDialog.Builder(getView().getContext());
         choice.setTitle("Are you sure to delete your account?");
 

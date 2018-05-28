@@ -19,6 +19,33 @@ public class Pet {
 
     }
 
+    public Pet(String id, String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String details, String isAdopt, String status, String gender, String category, String imgUrl, String owner_id) {
+        this.id = id;
+        this.pet_name = pet_name;
+        this.birthdate = birthdate;
+        this.breed = breed;
+        this.eyecolor = eyecolor;
+        this.furcolor = furcolor;
+        this.details = details;
+        this.isAdopt = isAdopt;
+        this.status = status;
+        this.gender = gender;
+        this.category = category;
+        this.imgUrl = imgUrl;
+        this.owner_id = owner_id;
+    }
+
+    public Pet(String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String details, String gender, String category) {
+        this.pet_name = pet_name;
+        this.birthdate = birthdate;
+        this.breed = breed;
+        this.eyecolor = eyecolor;
+        this.furcolor = furcolor;
+        this.details = details;
+        this.gender = gender;
+        this.category = category;
+    }
+
     public String getId() {
         return id;
     }

@@ -61,7 +61,7 @@ public class PetListFragment extends Fragment {
                 viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), PetDetails.class);
+                        Intent intent = new Intent(getActivity(), PetDetailsEdit.class);
                         intent.putExtra("id",adapter.getRef(position).getKey());
                         startActivity(intent);
                     }

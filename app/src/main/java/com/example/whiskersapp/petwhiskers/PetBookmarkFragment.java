@@ -25,12 +25,12 @@ import java.util.List;
 
 
 public class PetBookmarkFragment extends Fragment {
-    private RecyclerView recyclerview;
+    /*private RecyclerView recyclerview;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dbRef;
     private List<Pet> petList;
     private FirebaseAuth mAuth;
-    private PetBookmarkViewHolder bookmarkAdapter;
+    private PetBookmarkViewHolder bookmarkAdapter;*/
 
     public PetBookmarkFragment(){}
     @Nullable
@@ -43,7 +43,7 @@ public class PetBookmarkFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerview = view.findViewById(R.id.BookMarkPetRV);
+        /*recyclerview = view.findViewById(R.id.BookMarkPetRV);
         petList = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -74,8 +74,6 @@ public class PetBookmarkFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getContext(), "Error in retrieving data!", Toast.LENGTH_SHORT).show();
             }
-        });
-
-
+        });*/
     }
 }

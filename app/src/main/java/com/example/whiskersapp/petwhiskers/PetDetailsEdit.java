@@ -1,17 +1,24 @@
 package com.example.whiskersapp.petwhiskers;
 
+import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Intent;
+import android.widget.Toast;
 
-import com.example.whiskersapp.petwhiskers.Model.Bookmark;
 import com.example.whiskersapp.petwhiskers.Model.Pet;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +28,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-public class PetDetails extends AppCompatActivity {
+
+public class PetDetailsEdit extends AppCompatActivity {
     TextView petPrice, petBreed, petDesc;
     ImageView petImage;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -31,12 +39,14 @@ public class PetDetails extends AppCompatActivity {
     String id = "";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference table_pet_entry;
-    private FirebaseAuth mAuth;
+
+    private AlertDialog.Builder choice;
+    private AlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pet_details);
+        setContentView(R.layout.activity_pet_detailsedit);
         toolbar = (Toolbar) findViewById(R.id.toolbar_pet);
         toolbar.setNavigationIcon(R.drawable.ic_back_24dp);
         setSupportActionBar(toolbar);
@@ -51,14 +61,13 @@ public class PetDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         firebaseDatabase = FirebaseDatabase.getInstance();
         table_pet_entry = firebaseDatabase.getReference("pet");
-        mAuth = FirebaseAuth.getInstance();
 
         fab = (FloatingActionButton)findViewById(R.id.fav_fab);
-        petImage =(ImageView)findViewById(R.id.img_pet);
-        petBreed = (TextView)findViewById(R.id.pet_breed);
-        petDesc = (TextView)findViewById(R.id.pet_description_details);
+        petImage =(ImageView)findViewById(R.id.img_petedit);
+        petBreed = (TextView)findViewById(R.id.petedit_breed);
+        petDesc = (TextView)findViewById(R.id.petedit_description_details);
         //petImage = (ImageView)findViewById(R.id.img_pet);
-        collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_pet);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_petedit);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
@@ -105,72 +114,38 @@ public class PetDetails extends AppCompatActivity {
         });
     }
 
-    public void bookmarkPet(View view){
-        final String petId = getIntent().getStringExtra("id");
-        final String user_id = mAuth.getCurrentUser().getUid();
-        final Bookmark[] bookmark = {null};
-
-        final DatabaseReference dbBookmark = firebaseDatabase.getReference("bookmark");
-
-        dbBookmark.child(user_id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    Bookmark test = ds.getValue(Bookmark.class);
-
-                    if(test.getId().equals(petId)){
-                        bookmark[0] = test;
-                    }
-                }
-
-                if(bookmark[0] == null){
-                    //If bookmark does not exist
-                    String id = dbBookmark.push().getKey();
-                    Bookmark bookPet = new Bookmark();
-                    Pet test = getPet(petId);
-
-                    if(test != null){
-                        bookPet.setId(id);
-                        bookPet.setImgUrl(test.getImgUrl());
-                        bookPet.setPet_name(test.getPet_name());
-                        bookPet.setBreed(test.getBreed());
-                        bookPet.setGender(test.getGender());
-                        bookPet.setBookmark_user_id(user_id);
-                        bookPet.setOwner_id(test.getOwner_id());
-
-                        dbBookmark.child(id).setValue(bookPet);
-                    }
-
-                }else{
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+    public void editProfile(View view){
+        Intent intent = new Intent(PetDetailsEdit.this, EditPetEntry.class);
+        String petId = getIntent().getStringExtra("id");
+        intent.putExtra("pet_id", petId);
+        startActivity(intent);
     }
 
-    public Pet getPet(String id){
-        DatabaseReference dbPetFind = firebaseDatabase.getReference("pet");
-        final Pet[] pet = {null};
+    public void removeProfile(View view){
+        final String id = getIntent().getStringExtra("id");
+        final DatabaseReference tabPet = firebaseDatabase.getReference("pet");
 
-        dbPetFind.child(id).addValueEventListener(new ValueEventListener() {
+        choice = new AlertDialog.Builder(this);
+        choice.setTitle("Are you sure to delete your entry?");
+
+        choice.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    pet[0] = dataSnapshot.getValue(Pet.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(final DialogInterface dialogInterface, int i) {
+                tabPet.child(id).removeValue();
+                Intent intent = new Intent(PetDetailsEdit.this, MenuActivity.class);
+                startActivity(intent);
             }
         });
 
-        return pet[0];
+        choice.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        alert = choice.create();
+        alert.show();
     }
+
 }

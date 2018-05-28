@@ -65,7 +65,6 @@ public class PetBookmarkViewHolder extends RecyclerView.Adapter<PetBookmarkViewH
     public class BookmarkViewHolder extends RecyclerView.ViewHolder{
         public TextView petBreed, petStatus, petGender,petName;
         public ImageView petImage;
-        String currency = "₱";
         public CardView cardView;
 
         public BookmarkViewHolder(View itemView) {
