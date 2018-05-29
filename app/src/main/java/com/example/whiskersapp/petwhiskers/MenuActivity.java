@@ -120,6 +120,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         MenuItem home = menu.findItem(R.id.nav_home);
         home.setTitle("Home");
 
+        MenuItem map = menu.findItem(R.id.nav_map);
+        map.setTitle("Map");
+
         MenuItem findPet = menu.findItem(R.id.nav_findpet);
         findPet.setTitle("Find Pet");
 
@@ -186,6 +189,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_findpet) {
             fragment = new FindPetFragment();
             toolbar.setTitle("Find Pet");
+        }else if (id == R.id.nav_map) {
+            fragment = new MapFragment();
+            toolbar.setTitle("Map");
         } else if (id == R.id.nav_petentry) {
             fragment = new PetFragment();
             toolbar.setTitle("Pet");
