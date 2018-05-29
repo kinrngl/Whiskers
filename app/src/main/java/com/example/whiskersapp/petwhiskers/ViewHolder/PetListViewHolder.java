@@ -36,11 +36,6 @@ public class PetListViewHolder extends RecyclerView.ViewHolder{
     }
     public void setPetGender(String petGenderText){
         petGender.setText(petGenderText);
-           /* if(petPriceText.equals("Free") || petPriceText.equals("free")){
-                currency = "";
-            }
-           // petPrice.setText(currency+petPriceText);*/
-
     }
     public void setPetStatus(String petStatusText){
         petStatus.setText(petStatusText);

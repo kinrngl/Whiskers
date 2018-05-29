@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.whiskersapp.petwhiskers.Model.Bookmark;
 import com.example.whiskersapp.petwhiskers.Model.Pet;
@@ -100,49 +101,80 @@ public class PetDetails extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
 
     public void bookmarkPet(View view){
+        DatabaseReference dbBookmark = FirebaseDatabase.getInstance().getReference("bookmark");
         final String petId = getIntent().getStringExtra("id");
-        final String user_id = mAuth.getCurrentUser().getUid();
-        final Bookmark[] bookmark = {null};
 
-        final DatabaseReference dbBookmark = firebaseDatabase.getReference("bookmark");
+        if(petId != null){
+            dbBookmark.orderByChild("pet_id").equalTo(petId);
+            dbBookmark.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Bookmark temp = null;
 
-        dbBookmark.child(user_id).addValueEventListener(new ValueEventListener() {
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        Bookmark test = ds.getValue(Bookmark.class);
+
+                        if(test.getPet_id().equals(petId)){
+                            temp=test;
+                        }
+                    }
+
+                    if(temp == null){
+                        addBookmark(petId);
+                        Toast.makeText(getApplicationContext(), "Bookmark Added!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        removeBookmark(temp.getId());
+                        Toast.makeText(getApplicationContext(), "Bookmark Removed!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "Error in DB!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            Toast.makeText(getApplicationContext(), "ID not found!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void addBookmark(final String petId){
+        final FirebaseAuth userAuth = FirebaseAuth.getInstance();
+        DatabaseReference dbPet = FirebaseDatabase.getInstance().getReference("pet");
+        final DatabaseReference dbBookmark = FirebaseDatabase.getInstance().getReference("bookmark");
+
+        dbPet.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Pet pet = null;
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    Bookmark test = ds.getValue(Bookmark.class);
+                    Pet test = ds.getValue(Pet.class);
 
                     if(test.getId().equals(petId)){
-                        bookmark[0] = test;
+                        pet = test;
                     }
                 }
 
-                if(bookmark[0] == null){
-                    //If bookmark does not exist
+                if(pet != null){
+                    Bookmark bookmark = new Bookmark();
                     String id = dbBookmark.push().getKey();
-                    Bookmark bookPet = new Bookmark();
-                    Pet test = getPet(petId);
 
-                    if(test != null){
-                        bookPet.setId(id);
-                        bookPet.setImgUrl(test.getImgUrl());
-                        bookPet.setPet_name(test.getPet_name());
-                        bookPet.setBreed(test.getBreed());
-                        bookPet.setGender(test.getGender());
-                        bookPet.setBookmark_user_id(user_id);
-                        bookPet.setOwner_id(test.getOwner_id());
+                    bookmark.setId(id);
+                    bookmark.setPet_name(pet.getPet_name());
+                    bookmark.setBreed(pet.getBreed());
+                    bookmark.setGender(pet.getGender());
+                    bookmark.setOwner_id(pet.getOwner_id());
+                    bookmark.setBookmark_user_id(userAuth.getCurrentUser().getUid());
+                    bookmark.setImgUrl(pet.getImgUrl());
+                    bookmark.setPet_id(pet.getId());
+                    bookmark.setStatus(pet.getStatus());
 
-                        dbBookmark.child(id).setValue(bookPet);
-                    }
-
-                }else{
-
+                    dbBookmark.child(id).setValue(bookmark);
                 }
             }
 
@@ -153,24 +185,10 @@ public class PetDetails extends AppCompatActivity {
         });
     }
 
-    public Pet getPet(String id){
-        DatabaseReference dbPetFind = firebaseDatabase.getReference("pet");
-        final Pet[] pet = {null};
+    public void removeBookmark(String bookmarkId){
+        DatabaseReference dbBookmark = FirebaseDatabase.getInstance().getReference("bookmark");
 
-        dbPetFind.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    pet[0] = dataSnapshot.getValue(Pet.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return pet[0];
+        dbBookmark.child(bookmarkId).removeValue();
     }
+
 }

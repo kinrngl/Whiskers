@@ -1,7 +1,6 @@
 package com.example.whiskersapp.petwhiskers;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.whiskersapp.petwhiskers.Model.Pet;
-import com.example.whiskersapp.petwhiskers.ViewHolder.PetBookmarkViewHolder;
-import com.example.whiskersapp.petwhiskers.ViewHolder.PetListViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.example.whiskersapp.petwhiskers.ViewHolder.PetViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +30,7 @@ public class FindCatFragment extends Fragment {
     private DatabaseReference dbRef;
     private List<Pet> petList;
     private FirebaseAuth mAuth;
-    private PetBookmarkViewHolder bookmarkAdapter;
+    private PetViewHolder bookmarkAdapter;
 
     public FindCatFragment(){}
 
@@ -71,7 +68,7 @@ public class FindCatFragment extends Fragment {
                 llm.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerview.setLayoutManager(llm);
 
-                bookmarkAdapter = new PetBookmarkViewHolder(getContext(), petList);
+                bookmarkAdapter = new PetViewHolder(getContext(), petList);
                 recyclerview.setAdapter(bookmarkAdapter);
             }
 

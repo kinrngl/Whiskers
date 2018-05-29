@@ -4,11 +4,20 @@ public class Bookmark {
     String id;
     String pet_name;
     String breed;
-    String status; //available, deleted post
+    String status; //available, adopted, deleted post
     String gender;
     String imgUrl;
     String owner_id;
     String bookmark_user_id;
+    String pet_id;
+
+    public String getPet_id() {
+        return pet_id;
+    }
+
+    public void setPet_id(String pet_id) {
+        this.pet_id = pet_id;
+    }
 
     public Bookmark(){}
 
@@ -86,4 +95,5 @@ public class Bookmark {
     public void setBookmark_user_id(String bookmark_user_id) {
         this.bookmark_user_id = bookmark_user_id;
     }
+
 }

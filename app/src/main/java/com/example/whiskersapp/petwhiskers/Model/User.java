@@ -7,8 +7,7 @@ public class User {
     String contact;
     String email;
     String password;
-
-
+    //String status; //active, deactive, block
 
     public User(){
 

@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.whiskersapp.petwhiskers.Model.Pet;
-import com.example.whiskersapp.petwhiskers.PetBookmarkFragment;
+import com.example.whiskersapp.petwhiskers.Model.Bookmark;
 import com.example.whiskersapp.petwhiskers.PetDetails;
 import com.example.whiskersapp.petwhiskers.R;
 import com.squareup.picasso.Callback;
@@ -20,37 +19,37 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PetBookmarkViewHolder extends RecyclerView.Adapter<PetBookmarkViewHolder.BookmarkViewHolder> {
+public class BookmarksViewHolder extends RecyclerView.Adapter<BookmarksViewHolder.PetBookmarkViewHolder>{
     private Context context;
-    private List<Pet> petList;
+    private List<Bookmark> petList;
 
-    public PetBookmarkViewHolder(Context context, List<Pet> pets){
-        this.context = context;
+    public BookmarksViewHolder(Context ctx, List<Bookmark> pets){
+        this.context = ctx;
         this.petList = pets;
     }
 
     @Override
-    public BookmarkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PetBookmarkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout
                 ,parent, false);
-        return new BookmarkViewHolder(view);
+        return new PetBookmarkViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BookmarkViewHolder holder, final int position) {
-        final Pet pet = petList.get(position);
+    public void onBindViewHolder(PetBookmarkViewHolder holder, int position) {
+        final Bookmark book = petList.get(position);
 
-        holder.setPetName(pet.getPet_name());
-        holder.setPetBreed(pet.getBreed());
-        holder.setPetGender(pet.getGender());
-        holder.setPetStatus(pet.getStatus());
-        holder.setPetImage(context, pet.getImgUrl());
+        holder.setPetName(book.getPet_name());
+        holder.setPetBreed(book.getBreed());
+        holder.setPetGender(book.getGender());
+        holder.setPetStatus(book.getStatus());
+        holder.setPetImage(context, book.getImgUrl());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, PetDetails.class);
-                intent.putExtra("id",pet.getId());
+                intent.putExtra("id", book.getPet_id());
                 context.startActivity(intent);
             }
         });
@@ -61,13 +60,12 @@ public class PetBookmarkViewHolder extends RecyclerView.Adapter<PetBookmarkViewH
         return petList.size();
     }
 
-
-    public class BookmarkViewHolder extends RecyclerView.ViewHolder{
+    public class PetBookmarkViewHolder extends RecyclerView.ViewHolder {
         public TextView petBreed, petStatus, petGender,petName;
         public ImageView petImage;
         public CardView cardView;
 
-        public BookmarkViewHolder(View itemView) {
+        public PetBookmarkViewHolder(View itemView) {
             super(itemView);
 
             petImage = (ImageView)itemView.findViewById(R.id.pet_image);
@@ -86,8 +84,8 @@ public class PetBookmarkViewHolder extends RecyclerView.Adapter<PetBookmarkViewH
             petStatus.setText(petStatusText);
         }
         public void setPetName(String petNameText){ petName.setText(petNameText); }
-
         public void setPetImage(final Context context, final String thumb_image) {
+
             final ImageView pet_image = itemView.findViewById(R.id.pet_image);
 
             if (!thumb_image.equals("default_image")) {

@@ -1,18 +1,21 @@
 package com.example.whiskersapp.petwhiskers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.whiskersapp.petwhiskers.Model.Bookmark;
 import com.example.whiskersapp.petwhiskers.Model.Pet;
-import com.example.whiskersapp.petwhiskers.ViewHolder.PetBookmarkViewHolder;
+import com.example.whiskersapp.petwhiskers.ViewHolder.BookmarksViewHolder;
+import com.example.whiskersapp.petwhiskers.ViewHolder.PetListViewHolder;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,9 +31,15 @@ public class PetBookmarkFragment extends Fragment {
     /*private RecyclerView recyclerview;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dbRef;
-    private List<Pet> petList;
+    private List<Bookmark> petList;
     private FirebaseAuth mAuth;
-    private PetBookmarkViewHolder bookmarkAdapter;*/
+    private BookmarksViewHolder bookmarkAdapter;*/
+
+    private RecyclerView recyclerview;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference table_pet_entry;
+    private FirebaseRecyclerAdapter<Bookmark, PetListViewHolder> adapter;
+    private FirebaseAuth mAuth;
 
     public PetBookmarkFragment(){}
     @Nullable
@@ -47,27 +56,34 @@ public class PetBookmarkFragment extends Fragment {
         petList = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        dbRef = firebaseDatabase.getReference("pet");
+        dbRef = firebaseDatabase.getReference("bookmark");
 
+        dbRef.orderByChild("bookmark_user_id").equalTo(mAuth.getCurrentUser().getUid());
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String ownerId = mAuth.getCurrentUser().getUid();
-                Pet test;
+                Bookmark test = null;
 
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    test = ds.getValue(Pet.class);
-                    if(!test.getOwner_id().equals(ownerId)){
+                    test = ds.getValue(Bookmark.class);
+
+                    if(!test.getBookmark_user_id().equals(ownerId)){
                         petList.add(test);
                     }
                 }
 
-                LinearLayoutManager llm = new LinearLayoutManager(getContext());
-                llm.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerview.setLayoutManager(llm);
+                if(test != null){
+                    Toast.makeText(getContext(), "Data retrieved!", Toast.LENGTH_SHORT).show();
+                    LinearLayoutManager llm = new LinearLayoutManager(getContext());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerview.setLayoutManager(llm);
 
-                bookmarkAdapter = new PetBookmarkViewHolder(getContext(), petList);
-                recyclerview.setAdapter(bookmarkAdapter);
+                    bookmarkAdapter = new BookmarksViewHolder(getContext(), petList);
+                    recyclerview.setAdapter(bookmarkAdapter);
+                }else{
+                    Toast.makeText(getContext(), "No data retrieved!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -75,5 +91,38 @@ public class PetBookmarkFragment extends Fragment {
                 Toast.makeText(getContext(), "Error in retrieving data!", Toast.LENGTH_SHORT).show();
             }
         });*/
+
+        recyclerview = view.findViewById(R.id.BookMarkPetRV);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        table_pet_entry = firebaseDatabase.getReference("bookmark");
+        mAuth = FirebaseAuth.getInstance();
+        adapter = new FirebaseRecyclerAdapter<Bookmark, PetListViewHolder>(
+                Bookmark.class,
+                R.layout.card_layout,
+                PetListViewHolder.class,
+                table_pet_entry.orderByChild("bookmark_user_id").equalTo(mAuth.getCurrentUser().getUid())
+        ) {
+            @Override
+            protected void populateViewHolder(PetListViewHolder viewHolder, final Bookmark model, final int position) {
+                viewHolder.setPetName(model.getPet_name());
+                viewHolder.setPetBreed(model.getBreed());
+                viewHolder.setPetGender(model.getGender());
+                viewHolder.setPetStatus(model.getStatus());
+                viewHolder.setPetImage(getContext(),model.getImgUrl());
+                final Bookmark petInfo = model;
+                viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), PetDetails.class);
+                        intent.putExtra("id",model.getPet_id());
+                        startActivity(intent);
+                    }
+                });
+            }
+        };
+        adapter.startListening();
+        recyclerview.setAdapter(adapter);
+
     }
 }
