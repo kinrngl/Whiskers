@@ -36,7 +36,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:title="Pet Breed"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -142,11 +142,10 @@
                 android:text="Message Owner"
                 android:layout_marginTop="30dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/button_login"/>
+                android:background="@drawable/button_login"
+                android:onClick="messageOwner"/>
 
         </LinearLayout>
-
-        
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

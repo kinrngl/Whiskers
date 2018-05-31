@@ -5,7 +5,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.location.gps"/>
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,20 +28,20 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".SignUpActivity" />
-
         <activity android:name=".SignUpConActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MenuActivity"/>
-        <activity android:name=".PetDetails"/>
-        <activity android:name=".PetDetailsEdit"/>
-        <activity android:name=".EditPetEntry"/>
-        <activity android:name=".MapsActivity"/>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".PetDetails" />
+        <activity android:name=".PetDetailsEdit" />
+        <activity android:name=".EditPetEntry" />
+        <activity android:name=".MapsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

@@ -49,6 +49,7 @@ public class BookmarksViewHolder extends RecyclerView.Adapter<BookmarksViewHolde
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, PetDetails.class);
+                intent.putExtra("owner_id", book.getOwner_id());
                 intent.putExtra("id", book.getPet_id());
                 context.startActivity(intent);
             }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.example.whiskersapp.petwhiskers.Model.Bookmark;
 import com.example.whiskersapp.petwhiskers.Model.Pet;
@@ -189,6 +190,16 @@ public class PetDetails extends AppCompatActivity {
         DatabaseReference dbBookmark = FirebaseDatabase.getInstance().getReference("bookmark");
 
         dbBookmark.child(bookmarkId).removeValue();
+    }
+
+    public void messageOwner(View view){
+        String pet_owner_id = getIntent().getStringExtra("owner_id");
+        Intent intent = new Intent(PetDetails.this, ChatActivity.class);
+
+        intent.putExtra("user_one_id", mAuth.getCurrentUser().getUid());
+        intent.putExtra("user_two_id", pet_owner_id);
+
+        startActivity(intent);
     }
 
 }

@@ -50,6 +50,7 @@ public class PetViewHolder extends RecyclerView.Adapter<PetViewHolder.BookmarkVi
             public void onClick(View view) {
                 Intent intent = new Intent(context, PetDetails.class);
                 intent.putExtra("id",pet.getId());
+                intent.putExtra("owner_id", pet.getOwner_id());
                 context.startActivity(intent);
             }
         });
