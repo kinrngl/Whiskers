@@ -19,7 +19,6 @@ public class StartActivity extends AppCompatActivity {
         if(firebaseAuth.getCurrentUser() != null){
             finish();
             startActivity(new Intent(this, MenuActivity.class));
-
         }
     }
 

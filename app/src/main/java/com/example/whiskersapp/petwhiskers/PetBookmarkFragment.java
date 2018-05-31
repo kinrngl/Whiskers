@@ -116,6 +116,7 @@ public class PetBookmarkFragment extends Fragment {
                     public void onClick(View view) {
                         Intent intent = new Intent(getActivity(), PetDetails.class);
                         intent.putExtra("id",model.getPet_id());
+                        intent.putExtra("owner_id", model.getOwner_id());
                         startActivity(intent);
                     }
                 });

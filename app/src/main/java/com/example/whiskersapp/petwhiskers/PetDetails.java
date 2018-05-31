@@ -5,6 +5,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -194,6 +195,11 @@ public class PetDetails extends AppCompatActivity {
 
     public void messageOwner(View view){
         String pet_owner_id = getIntent().getStringExtra("owner_id");
+
+        if(!TextUtils.isEmpty(pet_owner_id)){
+            pet_owner_id = getIntent().getStringExtra("id");
+        }
+
         Intent intent = new Intent(PetDetails.this, ChatActivity.class);
 
         intent.putExtra("user_one_id", mAuth.getCurrentUser().getUid());

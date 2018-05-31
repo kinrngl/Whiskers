@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ChatActivity extends AppCompatActivity {
@@ -53,6 +55,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         message = findViewById(R.id.chat_msg);
         send = findViewById(R.id.send_msg);
@@ -132,7 +135,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void displayList(String id){
-        LinearLayoutManager lm = new LinearLayoutManager(getParent());
+        final LinearLayoutManager lm = new LinearLayoutManager(getParent());
         lm.setStackFromEnd(true);
         recyclerview.setLayoutManager(lm);
 
@@ -156,15 +159,29 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int messageCount = adapter.getItemCount();
+                int lastVisiblePosition = lm.findLastVisibleItemPosition();
+                if(lastVisiblePosition==-1 || (positionStart>=(messageCount-1)&& lastVisiblePosition == (positionStart-1))){
+                    recyclerview.smoothScrollToPosition(positionStart);
+                }
+            }
+        });
+
         recyclerview.smoothScrollToPosition(adapter.getItemCount());
+        adapter.notifyItemChanged(adapter.getItemCount());
         adapter.startListening();
         recyclerview.setAdapter(adapter);
     }
 
     public void sendMessage(){
         final String msg = message.getText().toString();
-        final String time = String.valueOf(new Date().getTime());
-
+        Date tentime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a");
+        final String time = df.format(tentime);
         final String id = dbChatMessage.push().getKey();
 
         if(!TextUtils.isEmpty(msg)){
