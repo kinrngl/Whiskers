@@ -30,13 +30,14 @@
         
     </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chat_list"
-            android:layout_width="match_parent"
-            android:layout_height="458dp"
-            android:paddingTop="?attr/actionBarSize"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/cardlayout_chat" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chat_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"
+        android:scrollbars="vertical"
+        android:layout_above="@+id/chat_msg"
+        tools:listitem="@layout/cardlayout_chat" />
 
                 <EditText
                     android:id="@+id/chat_msg"
