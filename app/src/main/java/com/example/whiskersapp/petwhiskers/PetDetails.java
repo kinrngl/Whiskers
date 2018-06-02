@@ -196,7 +196,7 @@ public class PetDetails extends AppCompatActivity {
     public void messageOwner(View view){
         String pet_owner_id = getIntent().getStringExtra("owner_id");
 
-        if(!TextUtils.isEmpty(pet_owner_id)){
+        if(TextUtils.isEmpty(pet_owner_id)){
             pet_owner_id = getIntent().getStringExtra("id");
         }
 

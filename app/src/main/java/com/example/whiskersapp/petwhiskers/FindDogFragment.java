@@ -51,6 +51,7 @@ public class  FindDogFragment extends Fragment {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                petList.clear();
                 String ownerId = mAuth.getCurrentUser().getUid();
                 Pet test;
 

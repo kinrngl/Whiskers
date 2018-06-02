@@ -29,7 +29,7 @@ public class ChatViewHolder extends RecyclerView.ViewHolder {
     }
 
     public  void setTime(String Msgtime) {
-        time.setText(Msgtime);
+        time.setText("Sent "+Msgtime);
     }
 
 }

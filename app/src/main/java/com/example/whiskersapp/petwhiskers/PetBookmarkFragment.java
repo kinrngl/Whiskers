@@ -28,13 +28,6 @@ import java.util.List;
 
 
 public class PetBookmarkFragment extends Fragment {
-    /*private RecyclerView recyclerview;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference dbRef;
-    private List<Bookmark> petList;
-    private FirebaseAuth mAuth;
-    private BookmarksViewHolder bookmarkAdapter;*/
-
     private RecyclerView recyclerview;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference table_pet_entry;
@@ -51,46 +44,6 @@ public class PetBookmarkFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        /*recyclerview = view.findViewById(R.id.BookMarkPetRV);
-        petList = new ArrayList<>();
-        mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        dbRef = firebaseDatabase.getReference("bookmark");
-
-        dbRef.orderByChild("bookmark_user_id").equalTo(mAuth.getCurrentUser().getUid());
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String ownerId = mAuth.getCurrentUser().getUid();
-                Bookmark test = null;
-
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    test = ds.getValue(Bookmark.class);
-
-                    if(!test.getBookmark_user_id().equals(ownerId)){
-                        petList.add(test);
-                    }
-                }
-
-                if(test != null){
-                    Toast.makeText(getContext(), "Data retrieved!", Toast.LENGTH_SHORT).show();
-                    LinearLayoutManager llm = new LinearLayoutManager(getContext());
-                    llm.setOrientation(LinearLayoutManager.VERTICAL);
-                    recyclerview.setLayoutManager(llm);
-
-                    bookmarkAdapter = new BookmarksViewHolder(getContext(), petList);
-                    recyclerview.setAdapter(bookmarkAdapter);
-                }else{
-                    Toast.makeText(getContext(), "No data retrieved!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Error in retrieving data!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
         recyclerview = view.findViewById(R.id.BookMarkPetRV);
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -124,6 +77,5 @@ public class PetBookmarkFragment extends Fragment {
         };
         adapter.startListening();
         recyclerview.setAdapter(adapter);
-
     }
 }
