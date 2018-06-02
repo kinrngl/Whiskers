@@ -1,18 +1,28 @@
 package com.example.whiskersapp.petwhiskers.Model;
 
-public class MapAddress {
+public class LocationAddress {
+    String id;
     String owner_id;
     String longitude;
     String latitude;
 
-    public MapAddress(){
+    public LocationAddress(){
 
     }
 
-    public MapAddress(String owner_id, String longitude, String latitude) {
+    public LocationAddress(String id, String owner_id, String longitude, String latitude) {
+        this.id = id;
         this.owner_id = owner_id;
         this.longitude = longitude;
         this.latitude = latitude;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOwner_id() {

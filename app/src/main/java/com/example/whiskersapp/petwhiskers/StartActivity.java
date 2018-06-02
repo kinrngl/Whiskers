@@ -24,11 +24,13 @@ public class StartActivity extends AppCompatActivity {
 
     public void signupView(View view){
         Intent intent = new Intent(StartActivity.this, SignUpActivity.class);
+        finish();
         startActivity(intent);
     }
 
     public void loginView(View view){
         Intent intent = new Intent(StartActivity.this, LoginActivity.class);
+        finish();
         startActivity(intent);
     }
 

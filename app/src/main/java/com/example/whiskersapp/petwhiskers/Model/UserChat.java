@@ -8,12 +8,10 @@ public class UserChat {
     String isReadUserTwo; //0 - read, 1 - unread
     String last_msg;
     String last_time;
-    String user_one_name;
-    String user_two_name;
 
     public UserChat(){}
 
-    public UserChat(String id, String user_one_id, String user_two_id, String isReadUserOne, String isReadUserTwo, String last_msg, String last_time, String user_one_name, String user_two_name) {
+    public UserChat(String id, String user_one_id, String user_two_id, String isReadUserOne, String isReadUserTwo, String last_msg, String last_time) {
         this.id = id;
         this.user_one_id = user_one_id;
         this.user_two_id = user_two_id;
@@ -21,8 +19,6 @@ public class UserChat {
         this.isReadUserTwo = isReadUserTwo;
         this.last_msg = last_msg;
         this.last_time = last_time;
-        this.user_one_name = user_one_name;
-        this.user_two_name = user_two_name;
     }
 
     public String getId() {
@@ -81,19 +77,4 @@ public class UserChat {
         this.last_time = last_time;
     }
 
-    public String getUser_one_name() {
-        return user_one_name;
-    }
-
-    public void setUser_one_name(String user_one_name) {
-        this.user_one_name = user_one_name;
-    }
-
-    public String getUser_two_name() {
-        return user_two_name;
-    }
-
-    public void setUser_two_name(String user_two_name) {
-        this.user_two_name = user_two_name;
-    }
 }

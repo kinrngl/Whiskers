@@ -14,6 +14,7 @@ public class Pet {
     String category;
     String imgUrl;
     String owner_id;
+    String location_id;
 
     public Pet(){
 
@@ -35,15 +36,21 @@ public class Pet {
         this.owner_id = owner_id;
     }
 
-    public Pet(String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String details, String gender, String category) {
+    public Pet(String id, String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String details, String isAdopt, String status, String gender, String category, String imgUrl, String owner_id, String location_id) {
+        this.id = id;
         this.pet_name = pet_name;
         this.birthdate = birthdate;
         this.breed = breed;
         this.eyecolor = eyecolor;
         this.furcolor = furcolor;
         this.details = details;
+        this.isAdopt = isAdopt;
+        this.status = status;
         this.gender = gender;
         this.category = category;
+        this.imgUrl = imgUrl;
+        this.owner_id = owner_id;
+        this.location_id = location_id;
     }
 
     public String getId() {
@@ -148,5 +155,13 @@ public class Pet {
 
     public void setOwner_id(String owner_id) {
         this.owner_id = owner_id;
+    }
+
+    public String getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(String location_id) {
+        this.location_id = location_id;
     }
 }

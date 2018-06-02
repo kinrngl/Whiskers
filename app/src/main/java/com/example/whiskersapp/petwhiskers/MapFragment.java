@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.whiskersapp.petwhiskers.Model.LocationAddress;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.internal.IGoogleCertificatesApi;
@@ -34,10 +35,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import  com.google.android.gms.location.LocationListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import android.Manifest;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -54,6 +63,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private double latitude, longitude;
     private Marker mMarker;
     private LocationRequest mLocationRequest;
+
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference dbLoc;
+
+    private List<LatLng> locList;
+    private List<Location> setLocList;
 
 
     @Nullable
@@ -103,6 +118,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        dbLoc = firebaseDatabase.getReference("location");
+        locList = new ArrayList<>();
+        setLocList = new ArrayList<>();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_frag);
 
 
@@ -157,9 +177,40 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 latitude = mLastLocation.getLatitude();
                 longitude = mLastLocation.getLongitude();
 
+                dbLoc.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot ds: dataSnapshot.getChildren()){
+                            LocationAddress test = ds.getValue(LocationAddress.class);
+                            LatLng temp = new LatLng(Double.valueOf(test.getLatitude()), Double.valueOf(test.getLongitude()));
+                            Location locSet = new Location(test.getId());
+
+                            locSet.setLatitude(Double.valueOf(test.getLatitude()));
+                            locSet.setLongitude(Double.valueOf(test.getLongitude()));
+
+                            setLocList.add(locSet);
+                            locList.add(temp);
+                        }
+
+                        for(int i=0; i < locList.size() && i < setLocList.size(); i++){
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(locList.get(i))
+                                    .title("Result"));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                //Sample Code for coordinate markers
                 LatLng latLng = new LatLng(latitude, longitude);
                 LatLng test = new LatLng(10.3804, 123.9645);
                 LatLng test1 = new LatLng(10.4008,123.9994);
+                LatLng place = new LatLng(10.3064319, 123.8680343); //my place
+                LatLng larsian = new LatLng(10.3094609, 123.8917898);
 
                 MarkerOptions markerOptions = new MarkerOptions()
                         .position(latLng)
@@ -176,7 +227,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 newLocation.setLongitude(123.9645);
 
 
-//float distance = crntLocation.distanceTo(newLocation);  in meters
                 float distance =crntLocation.distanceTo(newLocation) / 1000;
                 if(distance > 1){
                     mMap.addMarker(new MarkerOptions()
@@ -185,7 +235,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     mMap.addMarker(new MarkerOptions()
                             .position(test1)
                             .title("liloan"));
+
                 }
+
                 Toast.makeText(getContext(),String.format("Y%f", distance),Toast.LENGTH_SHORT ).show();
                 mMarker = mMap.addMarker(markerOptions);
 
