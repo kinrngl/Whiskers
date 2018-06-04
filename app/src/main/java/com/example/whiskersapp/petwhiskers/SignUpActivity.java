@@ -1,5 +1,13 @@
 package com.example.whiskersapp.petwhiskers;
 
+<<<<<<< Updated upstream
+=======
+import android.app.ProgressDialog;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+>>>>>>> Stashed changes
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, MenuActivity.class));
 
+<<<<<<< Updated upstream
         }
     }
 
@@ -50,12 +59,76 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(intent);
         }else{
             Toast.makeText(this,"Fill up the blanks",Toast.LENGTH_LONG).show();
+=======
+    public void registerUser(View view) {
+        final String fname = firstname.getText().toString();
+        final String lname = lastname.getText().toString();
+        final String contact_num = contact.getText().toString();
+        final String email_add = email.getText().toString();
+        final String pword = password.getText().toString();
+
+      //  progressDialog.setMessage("Creating account...");
+      //  progressDialog.show();
+
+        if (!TextUtils.isEmpty(fname) && !TextUtils.isEmpty(lname) && !TextUtils.isEmpty(contact_num)
+                && !TextUtils.isEmpty(email_add) && !TextUtils.isEmpty(pword)) {
+            /*if(registerAuth(email_add,pword) == 1){
+                String id = userAuth.getUid();
+                User user = new User(id,fname,lname,contact_num,email_add,pword);
+                dbRef.child(id).setValue(user);
+
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"User Added!", Toast.LENGTH_LONG).show();
+            }else{
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"User authentication Failed!", Toast.LENGTH_LONG).show();
+            })*/
+
+
+           /* userAuth.createUserWithEmailAndPassword(email_add, pword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        String id = userAuth.getUid();
+                        User user = new User(id,fname,lname,contact_num,email_add,pword);
+                        dbRef.child(id).setValue(user);
+
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"User Added!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SignUpActivity.this, MenuActivity.class);
+                        startActivity(intent);
+                    }else{
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"User authentication Failed!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }); */
+            Fragment fragment = new AddUserPhotoFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("firstname", fname);
+            bundle.putString("lastname", lname);
+            bundle.putString("contact", contact_num);
+            bundle.putString("email", email_add);
+            bundle.putString("password", pword);
+
+            fragment.setArguments(bundle);
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.contentFrame, fragment);
+            fragmentTransaction.commit();
+        } else {
+            Toast.makeText(getContext(), "Please fill up the fields.", Toast.LENGTH_SHORT).show();
+>>>>>>> Stashed changes
         }
+    }
 
     }
 
     public void loginView(View view){
-        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtras()
         startActivity(intent);
     }
 }
