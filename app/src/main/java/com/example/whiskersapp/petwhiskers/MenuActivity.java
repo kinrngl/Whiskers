@@ -39,13 +39,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference table_user;
     private User user, utest;
     private ProgressDialog progressDialog;
-
+    private FloatingActionButton petEntryFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        petEntryFAB = findViewById(R.id.cpefab);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         if (firebaseAuth.getCurrentUser() == null) {
@@ -80,18 +81,19 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             progressDialog.dismiss();
         }
 
-        FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
         petEntryFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentPetEntry = new PetEntryFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                getSupportActionBar().setTitle("");
-
+                if(fragmentPetEntry != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    getSupportActionBar().setTitle("Create Pet Entry");
+                    petEntryFAB.hide();
+                }
 
             }
         });
@@ -217,7 +219,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
             fragmentTransaction.replace(R.id.contentFrame, fragment);
             fragmentTransaction.commit();
-
+            petEntryFAB.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
