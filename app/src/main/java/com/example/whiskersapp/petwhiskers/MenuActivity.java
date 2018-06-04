@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -226,5 +227,17 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("check activity","Test1");
+        if (requestCode == AddLocationFragment.REQUEST_CHECK_SETTINGS){
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }
 

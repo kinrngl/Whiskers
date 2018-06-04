@@ -9,6 +9,9 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,15 +40,12 @@ public class AddPetPhotoFragment extends Fragment {
     private Button btnfilechoose;
     private Button btnAddPet;
     private ImageView imagePreview;
-    private Pet pet;
 
     private Uri imageUri;
 
-    private StorageReference mStoreRef;
-    private DatabaseReference mDatabaseRef;
-    private FirebaseAuth mAuth;
-
     private ProgressDialog progressDialog;
+
+    private Bundle bundle;
 
     @Nullable
     @Override
@@ -57,22 +57,7 @@ public class AddPetPhotoFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle bundle = getArguments();
-        pet = new Pet();
-
-        pet.setPet_name(bundle.getString("name"));
-        pet.setBreed(bundle.getString("breed"));
-        pet.setFurcolor(bundle.getString("furcolor"));
-        pet.setEyecolor(bundle.getString("eyecolor"));
-        pet.setGender(bundle.getString("gender"));
-        pet.setCategory(bundle.getString("category"));
-        pet.setBirthdate(bundle.getString("bday"));
-        pet.setDetails(bundle.getString("desc"));
-
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("pet");
-        mStoreRef = FirebaseStorage.getInstance().getReference("pet_entry");
-        mAuth = FirebaseAuth.getInstance();
-
+        bundle = getArguments();
         progressDialog = new ProgressDialog(getContext());
 
         btnfilechoose = view.findViewById(R.id.pet_btnupload);
@@ -91,7 +76,7 @@ public class AddPetPhotoFragment extends Fragment {
             public void onClick(View view) {
                 progressDialog.setMessage("Creating Pet Entry...");
                 progressDialog.show();
-                uploadFile();
+                proceedRec();
             }
         });
 
@@ -115,45 +100,30 @@ public class AddPetPhotoFragment extends Fragment {
         }
     }
 
-    private void uploadFile(){
+    private void proceedRec(){
         if(imageUri != null){
-            StorageReference fileRef = mStoreRef.child(System.currentTimeMillis()
-                +"."+getFileExtension(imageUri));
-            fileRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        String id = mDatabaseRef.push().getKey();
+            String imgUri = imageUri.toString();
+            bundle.putString("imgURI",imgUri );
+            if(imgUri != null){
+                Log.d("check uri", "not null");
+            }else{
+                Log.d("check uri", " null");
 
-                        pet.setId(id);
-                        pet.setImgUrl(taskSnapshot.getDownloadUrl().toString());
-                        pet.setIsAdopt("yes");
-                        pet.setOwner_id(mAuth.getCurrentUser().getUid());
-                        pet.setStatus("available");
-
-                        mDatabaseRef.child(id).setValue(pet);
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(), "Pet Added!", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(),"Error in uploading image.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+            }
             progressDialog.dismiss();
+            Fragment fragment = new AddLocationFragment();
+            fragment.setArguments(bundle);
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.contentFrame, fragment);
+            fragmentTransaction.commit();
+
+
         }else{
             Toast.makeText(getContext(), "No file uploaded.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = getContext().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
 }
