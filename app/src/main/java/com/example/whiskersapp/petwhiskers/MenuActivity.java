@@ -155,6 +155,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+        petEntryFAB.show();
     }
 
     @Override
@@ -230,7 +231,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("check activity","Test1");
-        if (requestCode == AddLocationFragment.REQUEST_CHECK_SETTINGS){
+        if ((requestCode == AddLocationFragment.REQUEST_CHECK_SETTINGS) || (requestCode == MapFragment.REQUEST_CHECK_SETTINGS)){
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
             fragment.onActivityResult(requestCode, resultCode, data);
         }
