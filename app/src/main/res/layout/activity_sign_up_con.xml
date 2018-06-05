@@ -16,37 +16,13 @@
         android:layout_marginTop="68dp"
         android:src="@drawable/logoword" />
 
-    <EditText
-        android:id="@+id/signup_username"
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
-        android:hint="Username"
-        android:backgroundTint="#ffff"
-        android:textColorHint="#ffff"
-        android:textColor="#ffff"
-        android:drawableLeft="@drawable/person"
-        android:fontFamily="@font/roboto"
-        android:paddingLeft="8dp"/>
-
-    <EditText
-        android:id="@+id/signup_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="280dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:backgroundTint="#ffff"
-        android:textColorHint="#ffff"
-        android:textColor="#ffff"
-        android:drawableLeft="@drawable/lock"
-        android:fontFamily="@font/roboto"
-        android:paddingLeft="8dp"/>
-
+        android:layout_marginTop="215dp"
+        android:text="Choose Image" />
 
     <Button
         android:id="@+id/createacct_button_"
@@ -57,11 +33,11 @@
         android:layout_marginBottom="120dp"
         android:background="@drawable/button_signup"
         android:fontFamily="@font/roboto"
+        android:onClick="createAccount"
         android:text="Create An Account"
         android:textAllCaps="false"
         android:textColor="#ffff"
-        android:textSize="20sp"
-        android:onClick="createAccount"/>
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="wrap_content"

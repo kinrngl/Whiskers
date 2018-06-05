@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,6 +40,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference table_user;
     private User user, utest;
     private ProgressDialog progressDialog;
+
+    private FloatingActionButton petEntryFAB;
 
 
     @Override
@@ -80,7 +83,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             progressDialog.dismiss();
         }
 
-        FloatingActionButton petEntryFAB = findViewById(R.id.cpefab);
+        petEntryFAB = findViewById(R.id.cpefab);
         petEntryFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,8 +94,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 getSupportActionBar().setTitle("");
-
-
+                petEntryFAB.hide();
             }
         });
 
@@ -111,6 +113,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -140,7 +143,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.contentFrame, new HomeFragment());
         tx.commit();
-
     }
 
 
@@ -158,6 +160,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
         return true;
     }
 
@@ -186,21 +189,27 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
             toolbar.setTitle("Home");
+            petEntryFAB.show();
         } else if (id == R.id.nav_findpet) {
             fragment = new FindPetFragment();
             toolbar.setTitle("Find Pet");
+            petEntryFAB.show();
         }else if (id == R.id.nav_map) {
             fragment = new MapFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Map");
         } else if (id == R.id.nav_petentry) {
             fragment = new PetFragment();
             toolbar.setTitle("Pet");
+            petEntryFAB.show();
         } else if (id == R.id.nav_message) {
             fragment = new MessageFragment();
             toolbar.setTitle("Message");
+            petEntryFAB.hide();
         } else if (id == R.id.nav_account) {
             fragment = new AccountDisplayFragment();
             toolbar.setTitle("Account");
+            petEntryFAB.hide();
         } else if (id == R.id.nav_logout) {
             firebaseAuth = FirebaseAuth.getInstance();
             progressDialog.setMessage("Logging out...");
@@ -217,7 +226,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
             fragmentTransaction.replace(R.id.contentFrame, fragment);
             fragmentTransaction.commit();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

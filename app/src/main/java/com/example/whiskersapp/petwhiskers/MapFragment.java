@@ -57,8 +57,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private static final int MY_PERMISSION_CODE = 1000;
     GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
     private Location mLastLocation;
     private double latitude, longitude;
     private Marker mMarker;
@@ -180,8 +178,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 dbLoc.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        mMap.clear();
                         for(DataSnapshot ds: dataSnapshot.getChildren()){
                             LocationAddress test = ds.getValue(LocationAddress.class);
+
                             LatLng temp = new LatLng(Double.valueOf(test.getLatitude()), Double.valueOf(test.getLongitude()));
                             Location locSet = new Location(test.getId());
 
@@ -205,41 +205,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     }
                 });
 
-                //Sample Code for coordinate markers
                 LatLng latLng = new LatLng(latitude, longitude);
-                LatLng test = new LatLng(10.3804, 123.9645);
-                LatLng test1 = new LatLng(10.4008,123.9994);
-                LatLng place = new LatLng(10.3064319, 123.8680343); //my place
-                LatLng larsian = new LatLng(10.3094609, 123.8917898);
 
                 MarkerOptions markerOptions = new MarkerOptions()
                         .position(latLng)
-                        .title("Your Position")
+                        .title("Your here!")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-
-
-                Location crntLocation=new Location("crntlocation");
-                crntLocation.setLatitude(10.4008);
-                crntLocation.setLongitude(123.9994);
-
-                Location newLocation=new Location("newlocation");
-                newLocation.setLatitude(10.3804);
-                newLocation.setLongitude(123.9645);
-
-
-                float distance =crntLocation.distanceTo(newLocation) / 1000;
-                if(distance > 1){
-                    mMap.addMarker(new MarkerOptions()
-                            .position(test)
-                            .title("lacion"));
-                    mMap.addMarker(new MarkerOptions()
-                            .position(test1)
-                            .title("liloan"));
-
-                }
-
-                Toast.makeText(getContext(),String.format("Y%f", distance),Toast.LENGTH_SHORT ).show();
-                mMarker = mMap.addMarker(markerOptions);
+                mMap.addMarker(markerOptions);
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
@@ -280,12 +252,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
-
             if(mGoogleApiClient != null){
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
 
             }
         }
-
     }
 }

@@ -219,8 +219,8 @@ public class AccountDisplayFragment extends Fragment {
                 }
 
                 if(locFound != null){
-                    locFound.setLongitude(longtitude);
-                    locFound.setLatitude(latitude);
+                    locFound.setLongitude(String.valueOf(longtitude));
+                    locFound.setLatitude(String.valueOf(latitude));
 
                     dbLoc.child(locFound.getId()).setValue(locFound);
                     Toast.makeText(getContext(), "Location updated!", Toast.LENGTH_SHORT).show();
@@ -230,8 +230,8 @@ public class AccountDisplayFragment extends Fragment {
                     String id = dbLoc.push().getKey();
 
                     loc.setId(id);
-                    loc.setLatitude(latitude);
-                    loc.setLongitude(longtitude);
+                    loc.setLatitude(String.valueOf(latitude));
+                    loc.setLongitude(String.valueOf(longtitude));
                     loc.setOwner_id(currentUser);
 
                     dbLoc.child(id).setValue(loc);
