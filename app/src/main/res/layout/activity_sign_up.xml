@@ -102,7 +102,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/button_signup"
+        android:background="@drawable/button_pink"
         android:fontFamily="@font/roboto"
         android:text="Create Account"
         android:textAllCaps="false"
@@ -117,7 +117,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:text="Already have an account? Login Here"
-        android:textColor="#ffff"
+        android:textColor="@color/colorthemeflesh"
         android:textSize="14sp"
         android:onClick="loginView"/>
 

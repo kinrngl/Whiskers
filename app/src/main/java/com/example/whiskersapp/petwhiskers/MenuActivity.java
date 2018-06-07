@@ -189,21 +189,27 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Home");
         } else if (id == R.id.nav_findpet) {
             fragment = new FindPetFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Find Pet");
         }else if (id == R.id.nav_map) {
             fragment = new MapFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Map");
         } else if (id == R.id.nav_petentry) {
             fragment = new PetFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Pet");
         } else if (id == R.id.nav_message) {
             fragment = new MessageFragment();
+            petEntryFAB.hide();
             toolbar.setTitle("Message");
         } else if (id == R.id.nav_account) {
             fragment = new AccountDisplayFragment();
+            petEntryFAB.hide();
             toolbar.setTitle("Account");
         } else if (id == R.id.nav_logout) {
             firebaseAuth = FirebaseAuth.getInstance();

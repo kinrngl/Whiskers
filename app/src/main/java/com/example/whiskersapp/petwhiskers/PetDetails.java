@@ -25,7 +25,8 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class PetDetails extends AppCompatActivity {
-    TextView petPrice, petBreed, petDesc;
+    TextView petBreed, petDesc, status;
+    TextView furcolor, eyecolor, birthdate, category, gender;
     ImageView petImage;
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton fab;
@@ -56,11 +57,17 @@ public class PetDetails extends AppCompatActivity {
         table_pet_entry = firebaseDatabase.getReference("pet");
         mAuth = FirebaseAuth.getInstance();
 
-        fab = (FloatingActionButton)findViewById(R.id.fav_fab);
-        petImage =(ImageView)findViewById(R.id.img_pet);
-        petBreed = (TextView)findViewById(R.id.pet_breed);
-        petDesc = (TextView)findViewById(R.id.pet_description_details);
-        //petImage = (ImageView)findViewById(R.id.img_pet);
+        fab = findViewById(R.id.fav_fab);
+        petImage =findViewById(R.id.img_pet);
+        petBreed = findViewById(R.id.pet_breed);
+        petDesc = findViewById(R.id.pet_description_details);
+        furcolor = findViewById(R.id.petdetails_furcolor);
+        eyecolor = findViewById(R.id.petdetails_eyecolor);
+        category = findViewById(R.id.petdetails_category);
+        birthdate = findViewById(R.id.petdetails_birthdate);
+        gender = findViewById(R.id.petdetails_gender);
+        status = findViewById(R.id.petdetails_status);
+
         collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_pet);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
@@ -84,6 +91,12 @@ public class PetDetails extends AppCompatActivity {
                 collapsingToolbarLayout.setTitle(pet.getPet_name());
                 petBreed.setText(pet.getBreed());
                 petDesc.setText(pet.getDetails());
+                status.setText(pet.getStatus());
+                eyecolor.setText(pet.getEyecolor());
+                furcolor.setText(pet.getFurcolor());
+                category.setText(pet.getCategory());
+                gender.setText(pet.getGender());
+                birthdate.setText(pet.getBirthdate());
 
                 if (!imageText.equals("default_image")) {
                     Picasso.with(getBaseContext()).load(pet.getImgUrl()).networkPolicy(NetworkPolicy.OFFLINE)

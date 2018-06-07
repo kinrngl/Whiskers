@@ -9,12 +9,15 @@ public class Pet {
     String furcolor;
     String details;
     String isAdopt; //yes - adopted, no - not yet adopted
-    String status; //available, deleted post
+    String status; //available, pending
+    String transaction; //FREE, SALE
     String gender;
     String category;
     String imgUrl;
     String owner_id;
     String location_id;
+    String verStat; //0 - pending, 1 - verified
+    String datePost;
 
     public Pet(){
 
@@ -36,7 +39,7 @@ public class Pet {
         this.owner_id = owner_id;
     }
 
-    public Pet(String id, String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String details, String isAdopt, String status, String gender, String category, String imgUrl, String owner_id, String location_id) {
+    public Pet(String id, String pet_name, String birthdate, String breed, String eyecolor, String furcolor, String details, String isAdopt, String status, String transaction, String gender, String category, String imgUrl, String owner_id, String location_id) {
         this.id = id;
         this.pet_name = pet_name;
         this.birthdate = birthdate;
@@ -46,6 +49,7 @@ public class Pet {
         this.details = details;
         this.isAdopt = isAdopt;
         this.status = status;
+        this.transaction = transaction;
         this.gender = gender;
         this.category = category;
         this.imgUrl = imgUrl;
@@ -163,5 +167,29 @@ public class Pet {
 
     public void setLocation_id(String location_id) {
         this.location_id = location_id;
+    }
+
+    public String getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(String transaction) {
+        this.transaction = transaction;
+    }
+
+    public String getVerStat() {
+        return verStat;
+    }
+
+    public void setVerStat(String verStat) {
+        this.verStat = verStat;
+    }
+
+    public String getDatePost() {
+        return datePost;
+    }
+
+    public void setDatePost(String datePost) {
+        this.datePost = datePost;
     }
 }

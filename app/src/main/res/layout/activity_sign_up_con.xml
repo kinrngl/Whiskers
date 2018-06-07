@@ -55,7 +55,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="120dp"
-        android:background="@drawable/button_signup"
+        android:background="@drawable/button_yellow"
         android:fontFamily="@font/roboto"
         android:text="Create An Account"
         android:textAllCaps="false"

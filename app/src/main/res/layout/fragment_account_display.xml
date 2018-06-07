@@ -9,12 +9,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#1565C0"
-        >
+        android:background="@color/colorthemepink">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="55dp"
@@ -26,11 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="25dp"
             android:fontFamily="@font/roboto"
             android:text="John Doe"
             android:textColor="#fff"
-            android:textSize="22sp" />
+            android:textStyle="bold"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -49,7 +49,7 @@
             android:drawableLeft="@drawable/person_blk"
             android:drawablePadding="20dp"
             android:text="John"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/acctdisplay_lname"
@@ -60,7 +60,7 @@
             android:drawableLeft="@drawable/person_blk"
             android:drawablePadding="20dp"
             android:text="Doe"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/acctdisplay_email"
@@ -71,7 +71,7 @@
             android:drawableLeft="@drawable/mail_blk"
             android:drawablePadding="20dp"
             android:text="johndoe@gmail.com"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/acctdisplay_contact"
@@ -82,7 +82,7 @@
             android:drawableLeft="@drawable/phone_blk"
             android:drawablePadding="20dp"
             android:text="09222-1111"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/acctdisplay_edit"
@@ -91,7 +91,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="145dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_pink"
+            android:textSize="14dp"
             android:text="Edit Profile" />
 
         <Button
@@ -101,7 +102,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="88dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_pink"
+            android:textSize="14dp"
             android:text="Update Address Location" />
 
         <Button
@@ -111,7 +113,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/button_login"
+            android:background="@drawable/button_pink"
+            android:textSize="14dp"
             android:text="Remove Account" />
     </RelativeLayout>
 

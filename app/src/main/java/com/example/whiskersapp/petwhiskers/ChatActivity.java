@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,7 +33,7 @@ import java.util.Date;
 public class ChatActivity extends AppCompatActivity {
 
     private EditText message;
-    private ImageView send, back;
+    private ImageView send;
     private TextView ownerName;
     private User user;
     private User userOne;
@@ -57,6 +58,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView recyclerview;
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +71,20 @@ public class ChatActivity extends AppCompatActivity {
         ownerName = findViewById(R.id.chat_ownerName);
         recyclerview = findViewById(R.id.chat_list);
         send = findViewById(R.id.send_msg);
-        back = findViewById(R.id.chat_back);
 
         user_one_id = getIntent().getStringExtra("user_one_id");
         user_two_id = getIntent().getStringExtra("user_two_id");
+
+        toolbar = findViewById(R.id.chat_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_back_24dp);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -147,13 +160,6 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendMessage();
-            }
-        });
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                previousActivity();
             }
         });
 

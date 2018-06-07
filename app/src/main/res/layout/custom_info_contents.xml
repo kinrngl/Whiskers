@@ -19,7 +19,7 @@
             android:id="@+id/user_name_info"
             android:layout_width="50dp"
             android:layout_height="10dp"
-            android:background="#b3000000"
+            android:background="@color/colorthemeflesh"
             android:text="Entries"
             android:textColor="@android:color/white"
             android:textSize="7sp"

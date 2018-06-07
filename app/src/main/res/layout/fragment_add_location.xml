@@ -46,7 +46,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="53dp"
-                android:background="@drawable/button_login"
+                android:background="@drawable/button_pink"
                 android:text="Add Current Location" />
 
 

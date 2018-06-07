@@ -47,8 +47,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/image"
         app:elevation="6dp"
-        app:layout_anchor="@id/app_bar_layout_pet"
-        app:layout_anchorGravity="bottom|right|end"
+        app:layout_anchor="@+id/app_bar_layout_pet"
+        app:layout_anchorGravity="right|bottom"
         app:pressedTranslationZ="12dp"
         app:useCompatPadding="true" />
 
@@ -76,13 +76,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/petedit_breed"
+                        android:id="@+id/petedits_breed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:padding="12dp"
                         android:text="Pet Breed"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorthemebrown"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -93,17 +93,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp">
 
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_attach_money_black_24dp" />
-
                         <TextView
-                            android:id="@+id/pet_price_details"
+                            android:id="@+id/petedits_status"
                             android:layout_weight="9"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="18dp"
                             android:text="500"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
@@ -115,7 +110,98 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-            
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                android:padding="16dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:stretchColumns="1">
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:paddingRight="20dp"
+                            android:text="Furcolor"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:text="Lorem Ipsum"
+                            android:id="@+id/petedits_furcolor"/>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:paddingRight="20dp"
+                            android:text="Eyecolor"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:text="Lorem Ipsum"
+                            android:id="@+id/petedits_eyecolor"/>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:paddingRight="20dp"
+                            android:text="Birthcdate"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:text="Lorem Ipsum"
+                            android:id="@+id/petedits_birthdate"/>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:paddingRight="20dp"
+                            android:text="Category"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:text="Lorem Ipsum"
+                            android:id="@+id/petedits_category"/>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:paddingRight="20dp"
+                            android:text="Gender"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:text="Lorem Ipsum"
+                            android:id="@+id/petedits_gender"/>
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
@@ -123,7 +209,7 @@
                 android:layout_height="wrap_content">
                 
                 <TextView
-                    android:id="@+id/petedit_description_details"
+                    android:id="@+id/petedits_description_details"
                     android:layout_marginTop="12dp"
                     android:lineSpacingMultiplier="1.5"
                     android:padding="12dp"
@@ -139,20 +225,30 @@
                 android:id="@+id/petedit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Pet Entry"
+                android:text="Edit Pet Entry Info"
                 android:layout_marginTop="30dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/button_login"
+                android:background="@drawable/button_blue"
                 android:onClick="editProfile"/>
+
+            <Button
+                android:id="@+id/petedit_adopt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mark as Adopted"
+                android:layout_marginTop="30dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/button_blue"
+                android:onClick="markAdopt"/>
+
             <Button
                 android:id="@+id/petedit_remove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remove Entry"
-                android:layout_marginTop="40dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/button_login"
-                android:onClick="removeProfile"/>
+                android:background="@drawable/button_pink"
+                android:onClick="removeProfile"
+                android:text="Remove Entry" />
 
         </LinearLayout>
 

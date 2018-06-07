@@ -22,9 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.example.whiskersapp.petwhiskers.Model.Bookmark;
 import com.example.whiskersapp.petwhiskers.Model.LocationAddress;
 import com.example.whiskersapp.petwhiskers.Model.Pet;
 import com.example.whiskersapp.petwhiskers.Model.User;
+import com.example.whiskersapp.petwhiskers.Model.UserChat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -60,6 +62,8 @@ public class AccountDisplayFragment extends Fragment {
     DatabaseReference dbRef;
     DatabaseReference dbLoc;
     DatabaseReference dbPet;
+    DatabaseReference dbBookmark;
+    DatabaseReference dbChat;
 
     private FusedLocationProviderClient fusedLocation;
     private LocationRequest locationRequest;
@@ -101,6 +105,8 @@ public class AccountDisplayFragment extends Fragment {
         dbRef = fbData.getReference("user_account");
         dbLoc = fbData.getReference("location");
         dbPet = fbData.getReference("pet");
+        dbBookmark = fbData.getReference("bookmark");
+        dbChat = fbData.getReference("user_chat");
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -130,6 +136,9 @@ public class AccountDisplayFragment extends Fragment {
         choice.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialogInterface, int i) {
+                deleteMessage(mAuth.getCurrentUser().getUid());
+                deleteBookmark(mAuth.getCurrentUser().getUid());
+                deleteEntry(mAuth.getCurrentUser().getUid());
                 dbRef.child(mAuth.getCurrentUser().getUid()).removeValue();
                 mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -296,6 +305,68 @@ public class AccountDisplayFragment extends Fragment {
                 }
             }
         }
+    }
+
+    public void deleteEntry(final String id){
+        dbPet.orderByChild("owner_id").equalTo(id);
+        dbPet.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    Pet test = ds.getValue(Pet.class);
+
+                    if(test.getOwner_id().equals(id)){
+                        dbPet.child(test.getId()).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void deleteBookmark(final String id){
+        dbBookmark.orderByChild("bookmark_user_id").equalTo(id);
+        dbBookmark.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    Bookmark test = ds.getValue(Bookmark.class);
+
+                    if(test.getBookmark_user_id().equals(id)){
+                        dbBookmark.child(test.getId()).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void deleteMessage(final String id){
+        dbChat.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    UserChat test = ds.getValue(UserChat.class);
+
+                    if(test.getUser_one_id().equals(id) || test.getUser_two_id().equals(id)){
+                        dbChat.child(test.getId()).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

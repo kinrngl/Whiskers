@@ -17,6 +17,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetViewHolder extends RecyclerView.Adapter<PetViewHolder.BookmarkViewHolder> {
@@ -104,5 +105,11 @@ public class PetViewHolder extends RecyclerView.Adapter<PetViewHolder.BookmarkVi
                 });
             }
         }
+    }
+
+    public void setFilter(ArrayList<Pet> newList){
+        petList = new ArrayList<>();
+        petList.addAll(newList);
+        notifyDataSetChanged();
     }
 }

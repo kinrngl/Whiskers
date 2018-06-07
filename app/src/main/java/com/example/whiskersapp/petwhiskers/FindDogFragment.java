@@ -4,9 +4,14 @@ package com.example.whiskersapp.petwhiskers;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -23,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  FindDogFragment extends Fragment {
+public class  FindDogFragment extends Fragment implements SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerview;
     private FirebaseDatabase firebaseDatabase;
@@ -32,9 +37,12 @@ public class  FindDogFragment extends Fragment {
     private FirebaseAuth mAuth;
     private PetViewHolder bookmarkAdapter;
 
+    MenuItem search;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_find_dog, null);
     }
 
@@ -57,7 +65,8 @@ public class  FindDogFragment extends Fragment {
 
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     test = ds.getValue(Pet.class);
-                    if(!test.getOwner_id().equals(ownerId) && test.getCategory().equals("Dog")){
+                    if(!test.getOwner_id().equals(ownerId) && test.getCategory().equals("Dog") &&
+                            test.getIsAdopt().equals("no")){
                         petList.add(test);
                     }
                 }
@@ -75,5 +84,37 @@ public class  FindDogFragment extends Fragment {
                 Toast.makeText(getContext(), "Error in retrieving data!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        search = menu.findItem(R.id.searchBar).setVisible(true);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        searchView.setOnQueryTextListener(FindDogFragment.this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<Pet> newList = new ArrayList<>();
+
+        for(Pet pet: petList){
+            String name = pet.getBreed().toLowerCase();
+
+            if(name.contains(newText)){
+                newList.add(pet);
+            }
+
+        }
+
+        bookmarkAdapter.setFilter(newList);
+        return false;
     }
 }

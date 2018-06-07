@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="161dp"
-        android:background="@drawable/button_login"
+        android:background="@drawable/button_blue"
         android:fontFamily="@font/roboto"
         android:text="Login Account"
         android:textAllCaps="false"
@@ -38,7 +38,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="74dp"
-        android:background="@drawable/button_signup"
+        android:background="@drawable/button_pink"
         android:fontFamily="@font/roboto"
         android:text="Create An Account"
         android:textAllCaps="false"
@@ -55,7 +55,7 @@
         android:fontFamily="@font/roboto"
         android:text="Login using Facebook Account"
         android:textAlignment="center"
-        android:textColor="#ffff"
+        android:textColor="@color/colorthemeflesh"
         android:textSize="16sp"
         android:onClick="fbView"/>
 

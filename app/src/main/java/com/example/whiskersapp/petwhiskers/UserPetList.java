@@ -67,21 +67,23 @@ public class UserPetList extends AppCompatActivity {
                 ) {
                     @Override
                     protected void populateViewHolder(PetListViewHolder viewHolder, Pet model, final int position) {
-                        viewHolder.setPetName(model.getPet_name());
-                        viewHolder.setPetBreed(model.getBreed());
-                        viewHolder.setPetGender(model.getGender());
-                        viewHolder.setPetStatus(model.getStatus());
-                        viewHolder.setPetImage(getApplicationContext(),model.getImgUrl());
-                        final Pet petInfo = model;
-                        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent(UserPetList.this, PetDetails.class);
-                                intent.putExtra("id",adapter.getRef(position).getKey());
-                                intent.putExtra("owner_id", petInfo.getOwner_id());
-                                startActivity(intent);
-                            }
-                        });
+                        if(model.getIsAdopt().equals("no")){
+                            viewHolder.setPetName(model.getPet_name());
+                            viewHolder.setPetBreed(model.getBreed());
+                            viewHolder.setPetGender(model.getGender());
+                            viewHolder.setPetStatus(model.getStatus());
+                            viewHolder.setPetImage(getApplicationContext(),model.getImgUrl());
+                            final Pet petInfo = model;
+                            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(UserPetList.this, PetDetails.class);
+                                    intent.putExtra("id",adapter.getRef(position).getKey());
+                                    intent.putExtra("owner_id", petInfo.getOwner_id());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
                     }
                 };
                 adapter.startListening();

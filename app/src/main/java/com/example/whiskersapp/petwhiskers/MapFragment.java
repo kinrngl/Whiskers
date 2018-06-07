@@ -63,8 +63,8 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static android.content.ContentValues.TAG;
 import static android.os.Looper.getMainLooper;
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback{
     private Marker marker;

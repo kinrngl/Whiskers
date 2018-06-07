@@ -38,7 +38,7 @@ public class PetEntryFragment extends Fragment{
     private Button proceed;
 
     private DatePickerDialog.OnDateSetListener mDatePickerDialog;
-    private Spinner petGen, petCat;
+    private Spinner petGen, petCat, petTrans;
 
     @Nullable
     @Override
@@ -59,16 +59,21 @@ public class PetEntryFragment extends Fragment{
         furcolor = view.findViewById(R.id.pet_furcolor);
         desc = view.findViewById(R.id.pet_desc);
         proceed = view.findViewById(R.id.pet_proceedAdd);
+        petTrans = view.findViewById(R.id.pet_trans);
 
 
         List<String> petGenItem = new ArrayList<String>();
         List<String> petCatItem = new ArrayList<String>();
+        List<String> petTransItem = new ArrayList<>();
 
         petCatItem.add("Dog");
         petCatItem.add("Cat");
 
         petGenItem.add("Male");
         petGenItem.add("Female");
+
+        petTransItem.add("Free");
+        petTransItem.add("Sale");
 
         ArrayAdapter<String> dataAdapterGen = new ArrayAdapter<String>(
                 getActivity(), android.R.layout.simple_spinner_dropdown_item, petGenItem
@@ -78,8 +83,13 @@ public class PetEntryFragment extends Fragment{
                 getActivity(), android.R.layout.simple_spinner_dropdown_item, petCatItem
         );
 
+        ArrayAdapter<String> dataAdapterTrans = new ArrayAdapter<>(
+                getActivity(), android.R.layout.simple_spinner_dropdown_item, petTransItem
+        );
+
         petGen.setAdapter(dataAdapterGen);
         petCat.setAdapter(dataAdapterCat);
+        petTrans.setAdapter(dataAdapterTrans);
 
         bday.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +134,7 @@ public class PetEntryFragment extends Fragment{
         String category = petCat.getSelectedItem().toString();
         String gender = petGen.getSelectedItem().toString();
         String petBday = bday.getText().toString();
+        String trans = petTrans.getSelectedItem().toString();
 
         if (!petName.isEmpty() && !petBreed.isEmpty() && !petEyecolor.isEmpty() && !petFurcolor.isEmpty()
                 && !petDesc.isEmpty() && !category.isEmpty() && !gender.isEmpty() && !petBday.isEmpty()) {
@@ -138,6 +149,7 @@ public class PetEntryFragment extends Fragment{
             bundle.putString("category", category);
             bundle.putString("gender", gender);
             bundle.putString("bday", petBday);
+            bundle.putString("trans", trans);
 
             fragment.setArguments(bundle);
 

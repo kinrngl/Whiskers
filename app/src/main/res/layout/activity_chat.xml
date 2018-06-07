@@ -7,15 +7,10 @@
     tools:context=".ChatActivity">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/chat_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:id="@+id/chat_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/arrow" />
+        android:background="@color/colorthemepink">
 
         <TextView
             android:id="@+id/chat_ownerName"
@@ -43,8 +38,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="20dp"
                     android:layout_marginRight="55dp"
+                    android:layout_marginLeft="8dp"
                     android:hint="Message here..." />
 
                 <ImageView

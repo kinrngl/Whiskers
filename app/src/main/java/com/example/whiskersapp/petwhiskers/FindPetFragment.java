@@ -1,27 +1,22 @@
 package com.example.whiskersapp.petwhiskers;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.whiskersapp.petwhiskers.Model.Pet;
-import com.example.whiskersapp.petwhiskers.ViewHolder.FindPetViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class FindPetFragment extends Fragment {
@@ -35,9 +30,11 @@ public class FindPetFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
 
         tabLayout = view.findViewById(R.id.findpet_tablayout);
         viewPager = view.findViewById(R.id.findpet_viewpager);
@@ -51,5 +48,11 @@ public class FindPetFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
 
+        MenuItem search = menu.findItem(R.id.searchBar).setVisible(true);
+        search.setTitle("Search Breed...");
+    }
 }
