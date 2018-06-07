@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:text="Edit Pet Entry"
         android:layout_marginTop="450dp"
-        android:background="@drawable/button_login"
+        android:background="@drawable/button_pink"
         android:onClick="updateEntry"/>
 
     <EditText

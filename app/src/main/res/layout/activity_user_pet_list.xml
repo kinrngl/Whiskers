@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".UserPetList">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorthemeblue"
+        android:id="@+id/toolbar_user_pet">
+
+
+        <TextView
+            android:id="@+id/pet_ownerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="John Doe"
+            android:textColor="#fff"
+            android:textAlignment="center"
+            android:layout_marginRight="16dp"
+            android:textSize="20sp"/>
+
+    </android.support.v7.widget.Toolbar>
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/UserPetListRV"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:scrollbars="vertical"
+    tools:listitem="@layout/card_layout"/>
+
+</LinearLayout>

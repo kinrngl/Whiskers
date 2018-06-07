@@ -9,7 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+<<<<<<< HEAD
 import android.support.v7.widget.SearchView;
+=======
+import android.util.Log;
+>>>>>>> dev-eevee
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,15 +44,20 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference table_user;
     private User user, utest;
     private ProgressDialog progressDialog;
+<<<<<<< HEAD
 
     private FloatingActionButton petEntryFAB;
 
+=======
+    private FloatingActionButton petEntryFAB;
+>>>>>>> dev-eevee
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        petEntryFAB = findViewById(R.id.cpefab);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         if (firebaseAuth.getCurrentUser() == null) {
@@ -83,11 +92,15 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             progressDialog.dismiss();
         }
 
+<<<<<<< HEAD
         petEntryFAB = findViewById(R.id.cpefab);
+=======
+>>>>>>> dev-eevee
         petEntryFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentPetEntry = new PetEntryFragment();
+<<<<<<< HEAD
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
@@ -95,6 +108,18 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.commit();
                 getSupportActionBar().setTitle("");
                 petEntryFAB.hide();
+=======
+                if(fragmentPetEntry != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.contentFrame, fragmentPetEntry);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    getSupportActionBar().setTitle("Create Pet Entry");
+                    petEntryFAB.hide();
+                }
+
+>>>>>>> dev-eevee
             }
         });
 
@@ -154,6 +179,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+        petEntryFAB.show();
     }
 
     @Override
@@ -188,10 +214,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Home");
             petEntryFAB.show();
         } else if (id == R.id.nav_findpet) {
             fragment = new FindPetFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Find Pet");
             petEntryFAB.show();
         }else if (id == R.id.nav_map) {
@@ -200,14 +228,17 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             toolbar.setTitle("Map");
         } else if (id == R.id.nav_petentry) {
             fragment = new PetFragment();
+            petEntryFAB.show();
             toolbar.setTitle("Pet");
             petEntryFAB.show();
         } else if (id == R.id.nav_message) {
             fragment = new MessageFragment();
+            petEntryFAB.hide();
             toolbar.setTitle("Message");
             petEntryFAB.hide();
         } else if (id == R.id.nav_account) {
             fragment = new AccountDisplayFragment();
+            petEntryFAB.hide();
             toolbar.setTitle("Account");
             petEntryFAB.hide();
         } else if (id == R.id.nav_logout) {
@@ -226,11 +257,27 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
             fragmentTransaction.replace(R.id.contentFrame, fragment);
             fragmentTransaction.commit();
+<<<<<<< HEAD
+=======
+            petEntryFAB.show();
+>>>>>>> dev-eevee
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("check activity","Test1");
+        if ((requestCode == AddLocationFragment.REQUEST_CHECK_SETTINGS) || (requestCode == MapFragment.REQUEST_CHECK_SETTINGS)){
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }
 

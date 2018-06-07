@@ -1,21 +1,35 @@
 package com.example.whiskersapp.petwhiskers;
 
+<<<<<<< HEAD
 import android.os.Bundle;
+=======
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+
+import android.os.Bundle;
+
+>>>>>>> dev-eevee
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+<<<<<<< HEAD
 import android.support.v7.widget.Toolbar;
+=======
+>>>>>>> dev-eevee
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> dev-eevee
 
 
 public class FindPetFragment extends Fragment {
@@ -32,9 +46,11 @@ public class FindPetFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
 
         tabLayout = view.findViewById(R.id.findpet_tablayout);
         viewPager = view.findViewById(R.id.findpet_viewpager);
@@ -51,10 +67,16 @@ public class FindPetFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+<<<<<<< HEAD
 
         search = menu.findItem(R.id.searchBar).setVisible(true);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
         searchView.setQueryHint("Search for Breed...");
     }
+=======
+>>>>>>> dev-eevee
 
+        MenuItem search = menu.findItem(R.id.searchBar).setVisible(true);
+        search.setTitle("Search Breed...");
+    }
 }

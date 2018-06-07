@@ -65,7 +65,8 @@ public class  FindDogFragment extends Fragment implements SearchView.OnQueryText
 
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     test = ds.getValue(Pet.class);
-                    if(!test.getOwner_id().equals(ownerId) && test.getCategory().equals("Dog")){
+                    if(!test.getOwner_id().equals(ownerId) && test.getCategory().equals("Dog") &&
+                            test.getIsAdopt().equals("no")){
                         petList.add(test);
                     }
                 }

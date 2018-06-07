@@ -30,6 +30,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static android.app.Activity.RESULT_OK;
 
 
@@ -68,6 +72,15 @@ public class AddPetPhotoFragment extends Fragment {
         pet.setCategory(bundle.getString("category"));
         pet.setBirthdate(bundle.getString("bday"));
         pet.setDetails(bundle.getString("desc"));
+        pet.setTransaction(bundle.getString("trans"));
+        pet.setIsAdopt("no");
+        pet.setVerStat("0");
+
+        Date tentime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a");
+        final String time = df.format(tentime);
+
+        pet.setDatePost(time);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("pet");
         mStoreRef = FirebaseStorage.getInstance().getReference("pet_entry");
@@ -118,31 +131,31 @@ public class AddPetPhotoFragment extends Fragment {
     private void uploadFile(){
         if(imageUri != null){
             StorageReference fileRef = mStoreRef.child(System.currentTimeMillis()
-                +"."+getFileExtension(imageUri));
+                    +"."+getFileExtension(imageUri));
             fileRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        String id = mDatabaseRef.push().getKey();
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            String id = mDatabaseRef.push().getKey();
 
-                        pet.setId(id);
-                        pet.setImgUrl(taskSnapshot.getDownloadUrl().toString());
-                        pet.setIsAdopt("yes");
-                        pet.setOwner_id(mAuth.getCurrentUser().getUid());
-                        pet.setStatus("available");
+                            pet.setId(id);
+                            pet.setImgUrl(taskSnapshot.getDownloadUrl().toString());
+                            pet.setIsAdopt("yes");
+                            pet.setOwner_id(mAuth.getCurrentUser().getUid());
+                            pet.setStatus("available");
 
-                        mDatabaseRef.child(id).setValue(pet);
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(), "Pet Added!", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(),"Error in uploading image.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            mDatabaseRef.child(id).setValue(pet);
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "Pet Added!", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(),"Error in uploading image.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
             progressDialog.dismiss();
         }else{

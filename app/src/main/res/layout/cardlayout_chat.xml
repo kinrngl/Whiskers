@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Lorem ipsum dolor sit amet"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_marginTop="20dp"
             android:textColor="#000"/>
 
