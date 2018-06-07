@@ -17,8 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.whiskersapp.petwhiskers.Model.LocationAddress;
-import com.example.whiskersapp.petwhiskers.Model.Pet;
-import com.example.whiskersapp.petwhiskers.Model.User;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -46,15 +44,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
-
 
 import android.Manifest;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
