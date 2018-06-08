@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -58,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView recyclerview;
 
-    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +76,7 @@ public class ChatActivity extends AppCompatActivity {
         user_one_id = getIntent().getStringExtra("user_one_id");
         user_two_id = getIntent().getStringExtra("user_two_id");
 
-        toolbar = findViewById(R.id.chat_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_back_24dp);
-        setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();

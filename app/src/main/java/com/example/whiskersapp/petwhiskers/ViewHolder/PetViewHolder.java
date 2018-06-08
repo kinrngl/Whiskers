@@ -43,7 +43,7 @@ public class PetViewHolder extends RecyclerView.Adapter<PetViewHolder.BookmarkVi
         holder.setPetName(pet.getPet_name());
         holder.setPetBreed(pet.getBreed());
         holder.setPetGender(pet.getGender());
-        holder.setPetStatus(pet.getStatus());
+        holder.setPetStatus(pet.getTransaction());
         holder.setPetImage(context, pet.getImgUrl());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

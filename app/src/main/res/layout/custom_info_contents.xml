@@ -8,7 +8,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_img_info"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:src="@drawable/user"
             android:layout_gravity="center"
@@ -16,13 +16,13 @@
 
         <TextView
             android:gravity="center"
-            android:id="@+id/user_name_info"
+            android:id="@+id/num_of_entries"
             android:layout_width="50dp"
-            android:layout_height="10dp"
+            android:layout_height="15dp"
             android:background="@color/colorthemeflesh"
             android:text="Entries"
             android:textColor="@android:color/white"
-            android:textSize="7sp"
+            android:textSize="12sp"
             android:layout_alignBottom="@+id/user_img_info" />
 
 </RelativeLayout>

@@ -78,24 +78,28 @@ public class SignUpActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),"User authentication Failed!", Toast.LENGTH_LONG).show();
             })*/
-            userAuth.createUserWithEmailAndPassword(email_add, pword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        String id = userAuth.getUid();
-                        User user = new User(id,fname,lname,contact_num,email_add,pword);
-                        dbRef.child(id).setValue(user);
+            if((contact_num.length() == 11 || contact_num.length() == 12) && contact_num.matches("[0-9]+")) {
+                userAuth.createUserWithEmailAndPassword(email_add, pword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            String id = userAuth.getUid();
+                            User user = new User(id, fname, lname, contact_num, email_add, pword);
+                            dbRef.child(id).setValue(user);
 
-                        progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"User Added!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(SignUpActivity.this, MenuActivity.class);
-                        startActivity(intent);
-                    }else{
-                        progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"User authentication Failed!", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "User Added!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(SignUpActivity.this, MenuActivity.class);
+                            startActivity(intent);
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "User authentication Failed!", Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            });
+                });
+            }else{
+                Toast.makeText(getApplicationContext(), "Invalid Contact Number: Ex. 09XX or 639XX!", Toast.LENGTH_LONG).show();
+            }
         }
 
     }

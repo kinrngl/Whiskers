@@ -9,6 +9,9 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,6 +150,13 @@ public class AddPetPhotoFragment extends Fragment {
                             mDatabaseRef.child(id).setValue(pet);
                             progressDialog.dismiss();
                             Toast.makeText(getContext(), "Pet Added!", Toast.LENGTH_SHORT).show();
+
+                            Fragment fragment = new PetFragment();
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                            fragmentTransaction.replace(R.id.contentFrame, fragment);
+                            fragmentTransaction.commit();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

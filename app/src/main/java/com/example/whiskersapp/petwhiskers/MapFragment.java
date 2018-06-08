@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.whiskersapp.petwhiskers.Model.LocationAddress;
+import com.example.whiskersapp.petwhiskers.Model.Pet;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -46,6 +47,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import android.Manifest;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -60,8 +62,7 @@ import static android.os.Looper.getMainLooper;
 public class MapFragment extends Fragment implements OnMapReadyCallback{
     private Marker marker;
     private GoogleMap mMap;
-    private Location mLastLocation;
-    private double latitude, longitude;
+
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private long UPDATE_INTERVAL = 10000;  /* 10 secs = 10 * 1000 */
@@ -69,16 +70,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 1000;
     private Task<LocationSettingsResponse> result;
     protected static final int REQUEST_CHECK_SETTINGS = 2000;
-    private FirebaseAuth firebaseAuth;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference table_user;
+    private DatabaseReference table_pet;
     private LocationAddress locationAddress;
     private LocationResult location;
-    private final float distanceKM = 10;
+    private final float distanceKM = 3;
     private Map<Marker, LocationAddress> markerUserHashMap = new HashMap<Marker, LocationAddress>();
     private BitmapDescriptor icon;
     private LocationCallback locationCallback;
     private FirebaseAuth mAuth;
+    private Pet pet;
+    private TextView numOfEntries;
+    private CircleImageView petImg;
+    private int ctr = 0;
+
 
 
     @Nullable
@@ -94,6 +101,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
 
     }
@@ -115,7 +123,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
                 View v = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
 
 
-                final CircleImageView petImg = (CircleImageView)v.findViewById(R.id.user_img_info);
+                petImg = (CircleImageView)v.findViewById(R.id.user_img_info);
+
+                table_pet = firebaseDatabase.getReference("pet");
+
+                table_pet.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ctr = 0;
+                        for(DataSnapshot children: dataSnapshot.getChildren()){
+
+                            pet = children.getValue(Pet.class);
+                            if(pet.getOwner_id().equals(userLoc.getOwner_id())){
+                                ctr++;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                numOfEntries = (TextView)v.findViewById(R.id.num_of_entries);
+
+                numOfEntries.setText(ctr+" Entries");
 
                 /*no user pic implemented yet Picasso.with(getActivity().getApplicationContext()).load(petContents.getImgUrl()).networkPolicy(NetworkPolicy.OFFLINE)
                         .placeholder(R.drawable.default_image).into(petImg, new Callback() {
@@ -258,7 +291,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
                     //  mMap.addMarker(new MarkerOptions().position(latLng).title("You").icon(BitmapDescriptorFactory.fromResource(R.drawable.user_marker)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
                     getNearbyUser(location);
                 }
             };
@@ -267,7 +300,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     }
     public void getNearbyUser(final LocationResult currentLocationResult){
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
         table_user = firebaseDatabase.getReference("location");
         table_user.addValueEventListener(new ValueEventListener() {
             @Override

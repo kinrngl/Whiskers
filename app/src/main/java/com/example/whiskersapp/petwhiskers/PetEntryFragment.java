@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,12 @@ import android.widget.Toast;
 import com.example.whiskersapp.petwhiskers.Model.Pet;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -138,26 +143,46 @@ public class PetEntryFragment extends Fragment{
 
         if (!petName.isEmpty() && !petBreed.isEmpty() && !petEyecolor.isEmpty() && !petFurcolor.isEmpty()
                 && !petDesc.isEmpty() && !category.isEmpty() && !gender.isEmpty() && !petBday.isEmpty()) {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String currentDate = df.format(Calendar.getInstance().getTime());
+            Log.e("date",currentDate);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-            Fragment fragment = new AddPetPhotoFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("name",petName);
-            bundle.putString("breed", petBreed);
-            bundle.putString("eyecolor", petEyecolor);
-            bundle.putString("furcolor", petFurcolor);
-            bundle.putString("desc", petDesc);
-            bundle.putString("category", category);
-            bundle.putString("gender", gender);
-            bundle.putString("bday", petBday);
-            bundle.putString("trans", trans);
+            try {
+                Date date1 = format.parse(petBday);
+                Date date2 = format.parse(currentDate);
 
-            fragment.setArguments(bundle);
+                if(date1.compareTo(date2) <= 0){
+                    Fragment fragment = new AddPetPhotoFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name",petName);
+                    bundle.putString("breed", petBreed);
+                    bundle.putString("eyecolor", petEyecolor);
+                    bundle.putString("furcolor", petFurcolor);
+                    bundle.putString("desc", petDesc);
+                    bundle.putString("category", category);
+                    bundle.putString("gender", gender);
+                    bundle.putString("bday", petBday);
+                    bundle.putString("trans", trans);
 
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragment.setArguments(bundle);
 
-            fragmentTransaction.replace(R.id.contentFrame, fragment);
-            fragmentTransaction.commit();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    fragmentTransaction.replace(R.id.contentFrame, fragment);
+                    fragmentTransaction.commit();
+                }else{
+                    Toast.makeText(getContext(), "Invalid date.", Toast.LENGTH_SHORT).show();
+
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(getContext(),"Invalid input",Toast.LENGTH_SHORT).show();
+
+            }
+
+
         } else {
             Toast.makeText(getContext(), "Please fill up the fields.", Toast.LENGTH_SHORT).show();
         }
