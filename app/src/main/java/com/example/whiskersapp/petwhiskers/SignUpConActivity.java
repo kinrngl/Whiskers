@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class SignUpConActivity extends AppCompatActivity {
 
@@ -67,9 +68,11 @@ public class SignUpConActivity extends AppCompatActivity {
             if(registerAuth(email,pword) == 1){
                 String id = userAuth.getUid();
 
+                String device_token = FirebaseInstanceId.getInstance().getToken();
+
                 User user = new User(id,fname,lname,contact,user_name,pword);
                 dbRef.child(id).setValue(user);
-
+                dbRef.child(id).setValue(device_token);
 
                 Toast.makeText(this,"User Added!", Toast.LENGTH_LONG).show();
             }

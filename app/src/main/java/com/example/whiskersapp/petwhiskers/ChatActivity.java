@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.example.whiskersapp.petwhiskers.Model.User;
 import com.example.whiskersapp.petwhiskers.Model.UserChat;
 import com.example.whiskersapp.petwhiskers.ViewHolder.ChatViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -47,12 +50,14 @@ public class ChatActivity extends AppCompatActivity {
     private String user_two_id;
     private String name_one;
     private String name_two;
+    private String receiver;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dbUserChat;
     private DatabaseReference dbChatMessage;
     private DatabaseReference dbUser;
+    private DatabaseReference dbNotification;
     private FirebaseRecyclerAdapter<ChatMessage, ChatViewHolder> adapter;
 
     private RecyclerView recyclerview;
@@ -78,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
         dbUserChat = firebaseDatabase.getReference("user_chat");
         dbUser = firebaseDatabase.getReference("user_account");
         dbChatMessage = firebaseDatabase.getReference("chat_message");
+        dbNotification = firebaseDatabase.getReference("notifications");
 
         user = null;
         chat=null;
@@ -86,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
         sendChat=null;
         userOne = null;
         userTwo = null;
+        receiver="";
 
         String chatname = null;
 
@@ -105,6 +112,7 @@ public class ChatActivity extends AppCompatActivity {
 
                         if (temp.getId().equals(temp_id)) {
                             user = temp;
+                            receiver = temp.getId();
                         }
                     }
 
@@ -128,6 +136,7 @@ public class ChatActivity extends AppCompatActivity {
                                 }
 
                                 displayList(chat.getId());
+                                sendNotification();
                             }
 
                             @Override
@@ -316,6 +325,14 @@ public class ChatActivity extends AppCompatActivity {
 
         dbUserChat.child(id).setValue(us);
         chat = us;
+    }
+
+    public void sendNotification(){
+        HashMap<String, String> notificationData = new HashMap<>();
+        notificationData.put("from", mAuth.getCurrentUser().getUid());
+        notificationData.put("type", "message");
+        dbNotification.child(receiver).push().setValue(notificationData);
+        Log.e("Chat","Im here at sendnotification");
     }
 
 }

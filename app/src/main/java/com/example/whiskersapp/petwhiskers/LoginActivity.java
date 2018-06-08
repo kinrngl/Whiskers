@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
             startActivity(intent);
         }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("user_account");
 
         email_add = findViewById(R.id.login_email);
         pword = findViewById(R.id.login_password);
@@ -68,6 +72,10 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         if(mAuth.getCurrentUser() != null){
+                            String device_token = FirebaseInstanceId.getInstance().getToken();
+                            String current_user = mAuth.getCurrentUser().getUid();
+
+                            databaseReference.child(current_user).child("device_token").setValue(device_token);
                             progressDialog.dismiss();
                             //Toast.makeText(getApplicationContext(), "Login Successfully!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, MenuActivity.class);

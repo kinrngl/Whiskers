@@ -83,7 +83,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     private DatabaseReference table_user;
     private LocationAddress locationAddress;
     private LocationResult location;
-    private final float distanceKM = 10;
+    private final float distanceKM = 3;
     private Map<Marker, LocationAddress> markerUserHashMap = new HashMap<Marker, LocationAddress>();
     private BitmapDescriptor icon;
     private LocationCallback locationCallback;
@@ -267,7 +267,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
                     //  mMap.addMarker(new MarkerOptions().position(latLng).title("You").icon(BitmapDescriptorFactory.fromResource(R.drawable.user_marker)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
                     getNearbyUser(location);
                 }
             };

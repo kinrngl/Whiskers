@@ -343,7 +343,6 @@ public class AddLocationFragment extends Fragment implements OnMapReadyCallback 
                         progressDialog.dismiss();
 
                         Toast.makeText(getContext(), "Pet Added!", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         Fragment fragment = new PetFragment();
                         fragment.setArguments(bundle);
 
