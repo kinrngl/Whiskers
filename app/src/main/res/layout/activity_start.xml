@@ -17,7 +17,6 @@
         android:src="@drawable/logoword" />
 
     <Button
-        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
@@ -46,17 +45,14 @@
         android:textSize="18sp"
         android:onClick="signupView"/>
 
-    <TextView
-        android:layout_width="match_parent"
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/roboto"
-        android:text="Login using Facebook Account"
-        android:textAlignment="center"
-        android:textColor="@color/colorthemeflesh"
-        android:textSize="16sp"
-        android:onClick="fbView"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp" />
 
 </RelativeLayout>

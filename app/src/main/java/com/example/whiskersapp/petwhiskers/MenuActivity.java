@@ -244,6 +244,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+
+
     }
 
 }
